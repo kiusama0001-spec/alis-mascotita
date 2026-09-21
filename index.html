@@ -2,539 +2,1054 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Para Alis 🖤</title>
 
 <style>
 :root{
-    --wine:#64152c;
-    --wine2:#9b3152;
-    --gold:#d7b56d;
-    --cream:#f5e8d0;
-    --black:#050505;
+  --bg:#080607;
+  --panel:#130b0e;
+  --panel2:#1b0d12;
+  --burgundy:#551522;
+  --burgundy2:#7d2032;
+  --gold:#d7b56d;
+  --gold2:#f1d99a;
+  --pink:#d96a87;
+  --white:#f7edf0;
+  --muted:#b9a5aa;
+  --cat:#161215;
+  --cat2:#241d20;
+  --shadow:rgba(0,0,0,.55);
 }
 
 *{
-    box-sizing:border-box;
-    -webkit-tap-highlight-color:transparent;
+  box-sizing:border-box;
 }
 
 html,body{
-    margin:0;
-    width:100%;
-    min-height:100%;
-    background:
-        radial-gradient(circle at 50% 20%, #32101c 0%, #10070b 38%, #030303 80%);
-    color:var(--cream);
-    font-family:Georgia,"Times New Roman",serif;
-    overflow-x:hidden;
+  margin:0;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  font-family:Georgia,"Times New Roman",serif;
+  background:
+    radial-gradient(circle at 50% 30%,#241016 0%,#10090c 42%,#050405 100%);
+  color:var(--white);
 }
 
 body{
-    min-height:100vh;
+  min-height:100vh;
+}
+
+button,
+input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
 }
 
 /* =========================
-   FONDO
-========================= */
-
-.bg-glow{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    background:
-        radial-gradient(circle at 20% 30%, rgba(155,49,82,.12), transparent 28%),
-        radial-gradient(circle at 80% 70%, rgba(215,181,109,.07), transparent 25%);
-    z-index:0;
-}
-
-.particle{
-    position:fixed;
-    width:3px;
-    height:3px;
-    border-radius:50%;
-    background:rgba(215,181,109,.45);
-    pointer-events:none;
-    animation:floatParticle linear infinite;
-    z-index:1;
-}
-
-@keyframes floatParticle{
-    from{
-        transform:translateY(110vh);
-        opacity:0;
-    }
-    15%{opacity:.7}
-    80%{opacity:.5}
-    to{
-        transform:translateY(-10vh);
-        opacity:0;
-    }
-}
-
-/* =========================
-   PANTALLA PIN
+   PIN
 ========================= */
 
 #lockScreen{
-    position:fixed;
-    inset:0;
-    z-index:1000;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:20px;
-    background:
-        radial-gradient(circle at center,#32101c 0%,#0b0508 45%,#020202 100%);
-    transition:opacity .8s ease, visibility .8s ease;
+  position:fixed;
+  inset:0;
+  z-index:5000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:
+    radial-gradient(circle at center,#32131d 0%,#11080c 45%,#050405 100%);
+  transition:opacity .7s ease,visibility .7s ease;
 }
 
 #lockScreen.hidden{
-    opacity:0;
-    visibility:hidden;
-    pointer-events:none;
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
 }
 
-.lock-box{
-    width:min(390px,92vw);
-    padding:32px 24px;
-    text-align:center;
-    border:1px solid rgba(215,181,109,.3);
-    border-radius:25px;
-    background:rgba(10,5,7,.84);
-    box-shadow:
-        0 0 60px rgba(100,21,44,.35),
-        inset 0 0 30px rgba(255,255,255,.02);
-    backdrop-filter:blur(12px);
+.lockBox{
+  width:min(390px,90vw);
+  text-align:center;
+  padding:35px 25px;
 }
 
-.lock-cat{
-    font-size:58px;
-    margin-bottom:8px;
-    animation:catFloat 3s ease-in-out infinite;
+.lockSymbol{
+  font-size:48px;
+  margin-bottom:10px;
+  filter:drop-shadow(0 0 15px rgba(215,181,109,.35));
 }
 
-@keyframes catFloat{
-    0%,100%{transform:translateY(0)}
-    50%{transform:translateY(-8px)}
+.lockBox h1{
+  margin:5px 0 8px;
+  color:var(--gold2);
+  font-size:34px;
+  font-weight:normal;
 }
 
-.lock-box h1{
-    margin:4px 0 7px;
-    font-size:29px;
-    color:var(--gold);
-    font-weight:normal;
+.lockBox p{
+  color:var(--muted);
+  margin:0 0 25px;
 }
 
-.lock-box p{
-    margin:0 0 22px;
-    opacity:.7;
-    font-family:Arial,sans-serif;
-    font-size:13px;
+.pinDots{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  margin-bottom:28px;
 }
 
-.pin-display{
-    height:38px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:10px;
-    margin-bottom:18px;
+.pinDot{
+  width:11px;
+  height:11px;
+  border-radius:50%;
+  border:1px solid var(--gold);
+  transition:.2s;
 }
 
-.pin-dot{
-    width:9px;
-    height:9px;
-    border-radius:50%;
-    border:1px solid var(--gold);
-    transition:.2s;
+.pinDot.active{
+  background:var(--gold);
+  box-shadow:0 0 12px rgba(215,181,109,.6);
 }
 
-.pin-dot.active{
-    background:var(--gold);
-    box-shadow:0 0 10px rgba(215,181,109,.7);
+.keypad{
+  display:grid;
+  grid-template-columns:repeat(3,72px);
+  gap:12px;
+  justify-content:center;
 }
 
-.pin-keypad{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:10px;
+.key{
+  width:72px;
+  height:58px;
+  border:1px solid rgba(215,181,109,.25);
+  border-radius:14px;
+  background:rgba(255,255,255,.035);
+  color:var(--white);
+  font-size:21px;
+  transition:.18s;
 }
 
-.pin-key{
-    border:1px solid rgba(215,181,109,.2);
-    background:rgba(255,255,255,.035);
-    color:var(--cream);
-    border-radius:14px;
-    min-height:54px;
-    font-size:19px;
-    cursor:pointer;
-    transition:.15s;
+.key:hover{
+  background:rgba(125,32,50,.3);
+  border-color:var(--gold);
+  transform:translateY(-2px);
 }
 
-.pin-key:active{
-    transform:scale(.92);
-    background:rgba(155,49,82,.4);
-    border-color:var(--gold);
+.key:active{
+  transform:scale(.94);
 }
 
-.pin-key.zero{
-    grid-column:2;
-}
-
-.pin-error{
-    height:20px;
-    margin-top:12px;
-    color:#d56c87;
-    font-family:Arial,sans-serif;
-    font-size:12px;
-}
-
-.shake{
-    animation:shake .35s;
-}
-
-@keyframes shake{
-    0%,100%{transform:translateX(0)}
-    25%{transform:translateX(-8px)}
-    75%{transform:translateX(8px)}
+.pinError{
+  height:24px;
+  margin-top:16px;
+  color:#e9849e;
+  font-size:14px;
 }
 
 /* =========================
-   CONTENIDO
+   APP
 ========================= */
 
-#mainContent{
-    position:relative;
-    z-index:2;
-    width:100%;
-    min-height:100vh;
-    padding:65px 20px 100px;
-    opacity:0;
-    transform:translateY(20px);
-    transition:opacity 1.2s ease, transform 1.2s ease;
+#app{
+  position:fixed;
+  inset:0;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .8s ease;
 }
 
-#mainContent.visible{
-    opacity:1;
-    transform:translateY(0);
+#app.visible{
+  opacity:1;
+  pointer-events:auto;
 }
 
-.hero{
-    max-width:850px;
-    margin:0 auto;
-    text-align:center;
-    padding:30px 10px 40px;
+.topBar{
+  position:fixed;
+  top:18px;
+  right:18px;
+  z-index:900;
+  display:flex;
+  gap:10px;
 }
 
-.hero .small{
-    font-family:Arial,sans-serif;
-    text-transform:uppercase;
-    letter-spacing:4px;
-    font-size:10px;
-    color:var(--gold);
-    opacity:.75;
+.topBtn{
+  width:43px;
+  height:43px;
+  border-radius:50%;
+  border:1px solid rgba(215,181,109,.3);
+  background:rgba(10,6,8,.78);
+  color:var(--gold2);
+  backdrop-filter:blur(8px);
+  font-size:18px;
+  transition:.2s;
 }
 
-.hero h1{
-    margin:14px 0 8px;
-    font-size:clamp(38px,10vw,70px);
-    font-weight:normal;
-    color:#f4dfb0;
-    text-shadow:0 0 30px rgba(155,49,82,.35);
+.topBtn:hover{
+  border-color:var(--gold);
+  background:rgba(85,21,34,.65);
+  transform:translateY(-2px);
 }
 
-.hero p{
-    margin:0;
-    opacity:.65;
-    font-style:italic;
+.content{
+  position:relative;
+  width:100%;
+  height:100%;
+  padding:80px 25px 120px;
+  overflow:auto;
+  scrollbar-width:none;
 }
 
-.heart-line{
-    margin:25px auto;
-    width:80px;
-    height:1px;
-    background:linear-gradient(90deg,transparent,var(--gold),transparent);
+.content::-webkit-scrollbar{
+  display:none;
 }
+
+.title{
+  width:min(700px,92vw);
+  margin:0 auto;
+  text-align:center;
+}
+
+.eyebrow{
+  color:var(--gold);
+  letter-spacing:3px;
+  text-transform:uppercase;
+  font-size:11px;
+  margin-bottom:8px;
+}
+
+.title h1{
+  margin:0;
+  font-size:clamp(38px,7vw,64px);
+  font-weight:normal;
+  color:#f5dce2;
+  text-shadow:0 0 30px rgba(217,106,135,.18);
+}
+
+.title p{
+  color:var(--muted);
+  margin-top:8px;
+}
+
+/* =========================
+   LETTER
+========================= */
 
 .letter{
-    position:relative;
-    max-width:720px;
-    margin:0 auto;
-    padding:35px clamp(22px,6vw,55px);
-    border:1px solid rgba(215,181,109,.22);
-    border-radius:25px;
-    background:
-        linear-gradient(135deg,rgba(255,255,255,.035),rgba(100,21,44,.08));
-    box-shadow:
-        0 30px 80px rgba(0,0,0,.4),
-        inset 0 0 40px rgba(255,255,255,.015);
+  width:min(690px,92vw);
+  margin:35px auto 150px;
+  padding:34px clamp(22px,5vw,48px);
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.015));
+  border:1px solid rgba(215,181,109,.2);
+  border-radius:20px;
+  box-shadow:0 25px 70px rgba(0,0,0,.35);
+  line-height:1.85;
+  color:#e9dfe2;
 }
 
-.letter:before{
-    content:"";
-    position:absolute;
-    inset:8px;
-    border:1px solid rgba(215,181,109,.06);
-    border-radius:19px;
-    pointer-events:none;
+.letter .name{
+  color:var(--gold2);
+  font-size:23px;
+  margin-top:0;
 }
 
-.letter h2{
-    position:relative;
-    color:var(--gold);
-    font-weight:normal;
-    margin:0 0 25px;
-    font-size:27px;
-}
-
-.letter p{
-    position:relative;
-    font-size:17px;
-    line-height:1.9;
-    margin:0 0 18px;
-    color:#eadcc7;
-}
-
-.signature{
-    margin-top:30px;
-    text-align:right;
-    color:var(--gold);
-    font-style:italic;
-    font-size:19px;
+.letter strong{
+  color:#f0cbd5;
 }
 
 /* =========================
-   BOTÓN MÚSICA
+   BOTTOM MENU
 ========================= */
 
-#musicButton{
-    position:fixed;
-    top:16px;
-    right:16px;
-    z-index:500;
-    border:1px solid rgba(215,181,109,.35);
-    background:rgba(10,5,7,.8);
-    color:var(--gold);
-    width:46px;
-    height:46px;
-    border-radius:50%;
-    font-size:18px;
-    cursor:pointer;
-    backdrop-filter:blur(8px);
-    box-shadow:0 5px 25px rgba(0,0,0,.35);
+.bottomMenu{
+  position:fixed;
+  left:50%;
+  bottom:14px;
+  transform:translateX(-50%);
+  z-index:1000;
+  width:min(620px,94vw);
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  padding:9px;
+  border:1px solid rgba(215,181,109,.16);
+  border-radius:22px;
+  background:rgba(8,5,7,.84);
+  backdrop-filter:blur(14px);
+  box-shadow:0 12px 40px rgba(0,0,0,.5);
+}
+
+.menuBtn{
+  flex:1;
+  min-width:0;
+  border:0;
+  border-radius:15px;
+  padding:9px 5px;
+  background:transparent;
+  color:var(--white);
+  transition:.2s;
+}
+
+.menuBtn span{
+  display:block;
+  font-size:20px;
+  margin-bottom:3px;
+}
+
+.menuBtn small{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+}
+
+.menuBtn:hover{
+  background:rgba(125,32,50,.25);
+  transform:translateY(-2px);
+}
+
+.menuBtn:hover small{
+  color:var(--gold2);
 }
 
 /* =========================
-   CORAZONES
+   CAT
+   Proporciones tipo Chi:
+   cabeza grande + cuerpo pequeño
 ========================= */
 
-.floating-heart{
-    position:fixed;
-    pointer-events:none;
-    z-index:20;
-    color:#b54b6a;
-    font-size:18px;
-    animation:heartFloat 2.4s ease-out forwards;
+.cat{
+  position:fixed;
+  z-index:700;
+  left:50%;
+  top:65%;
+  width:120px;
+  height:135px;
+  user-select:none;
+  touch-action:none;
+  cursor:grab;
+  --faceDirection:1;
+  transition:left .05s linear,top .05s linear;
 }
 
-@keyframes heartFloat{
-    0%{
-        opacity:0;
-        transform:translate(-50%,0) scale(.5);
-    }
-    15%{opacity:1}
-    100%{
-        opacity:0;
-        transform:translate(-50%,-100px) scale(1.2);
-    }
+.cat.dragging{
+  cursor:grabbing;
 }
 
-/* =========================
-   GATO
-========================= */
-
-.walking-cat{
-    position:fixed;
-    left:0;
-    top:0;
-    width:145px;
-    height:145px;
-    z-index:300;
-    pointer-events:auto;
-    touch-action:none;
-    user-select:none;
-    cursor:grab;
-    will-change:transform;
-    filter:
-        drop-shadow(0 12px 12px rgba(0,0,0,.55))
-        drop-shadow(0 0 8px rgba(155,49,82,.18));
+.catVisual{
+  position:absolute;
+  inset:0;
+  transform:scaleX(var(--faceDirection));
+  transform-origin:center;
 }
 
-.walking-cat.dragging{
-    cursor:grabbing;
+/* cuerpo pequeño */
+
+.catBody{
+  position:absolute;
+  width:54px;
+  height:48px;
+  left:33px;
+  top:68px;
+  background:linear-gradient(145deg,#211a1d,#0e0b0d);
+  border-radius:48% 48% 42% 42%;
+  box-shadow:
+    inset -7px -5px 10px rgba(0,0,0,.5),
+    0 8px 14px rgba(0,0,0,.3);
+  z-index:2;
 }
 
-.cat-svg{
-    width:100%;
-    height:100%;
-    overflow:visible;
+/* cabeza grande */
+
+.catHead{
+  position:absolute;
+  width:96px;
+  height:80px;
+  left:12px;
+  top:19px;
+  background:linear-gradient(145deg,#292225,#100d0f);
+  border-radius:48% 48% 45% 45%;
+  box-shadow:
+    inset -8px -7px 12px rgba(0,0,0,.5),
+    0 9px 20px rgba(0,0,0,.38);
+  z-index:5;
 }
 
-/* cuerpo */
-.cat-body{
-    transform-origin:76px 93px;
-    animation:bodyWalk .42s ease-in-out infinite alternate;
+/* orejas grandes tipo Chi */
+
+.ear{
+  position:absolute;
+  width:38px;
+  height:42px;
+  top:-17px;
+  background:#181316;
+  border-radius:8px 28px 5px 28px;
+  z-index:-1;
 }
 
-@keyframes bodyWalk{
-    from{transform:translateY(0) rotate(-1deg)}
-    to{transform:translateY(-2px) rotate(1deg)}
+.ear.left{
+  left:5px;
+  transform:rotate(-18deg);
 }
 
-/* patas */
-.leg-front,
-.leg-back{
-    transform-box:fill-box;
-    transform-origin:top center;
+.ear.right{
+  right:5px;
+  transform:scaleX(-1) rotate(-18deg);
 }
 
-.leg-front{
-    animation:frontLeg .42s ease-in-out infinite alternate;
-}
-
-.leg-back{
-    animation:backLeg .42s ease-in-out infinite alternate-reverse;
-}
-
-@keyframes frontLeg{
-    from{transform:rotate(8deg)}
-    to{transform:rotate(-10deg)}
-}
-
-@keyframes backLeg{
-    from{transform:rotate(-8deg)}
-    to{transform:rotate(10deg)}
-}
-
-/* cola */
-.cat-tail{
-    transform-box:fill-box;
-    transform-origin:left center;
-    animation:tailMove 1.15s ease-in-out infinite;
-}
-
-@keyframes tailMove{
-    0%,100%{transform:rotate(-3deg)}
-    50%{transform:rotate(10deg)}
+.ear::after{
+  content:"";
+  position:absolute;
+  width:20px;
+  height:23px;
+  left:9px;
+  top:10px;
+  background:#3a2029;
+  border-radius:8px 18px 4px 18px;
+  opacity:.65;
 }
 
 /* ojos */
-.cat-eye{
-    transform-box:fill-box;
-    transform-origin:center;
-    animation:blink 5s infinite;
+
+.eye{
+  position:absolute;
+  width:12px;
+  height:17px;
+  top:31px;
+  background:#080708;
+  border-radius:50%;
+  box-shadow:0 0 0 2px rgba(215,181,109,.08);
+  transform-origin:center;
 }
 
-@keyframes blink{
-    0%,42%,46%,100%{transform:scaleY(1)}
-    44%{transform:scaleY(.08)}
+.eye.left{
+  left:28px;
 }
 
-/* orejas */
-.cat-ear{
-    transform-origin:center bottom;
-    animation:earMove 4s ease-in-out infinite;
+.eye.right{
+  right:28px;
 }
 
-@keyframes earMove{
-    0%,90%,100%{transform:rotate(0)}
-    94%{transform:rotate(-5deg)}
-    97%{transform:rotate(5deg)}
+.eye::after{
+  content:"";
+  position:absolute;
+  width:4px;
+  height:6px;
+  top:3px;
+  left:3px;
+  border-radius:50%;
+  background:#e8d5b0;
+  opacity:.75;
 }
 
-/* estado sentado */
-.walking-cat.sitting .cat-body{
-    animation:none;
-    transform:translateY(7px);
+.cat.blink .eye{
+  height:3px;
+  top:38px;
+  border-radius:5px;
 }
 
-.walking-cat.sitting .leg-front,
-.walking-cat.sitting .leg-back{
-    animation:none;
-    transform:rotate(0);
+.cat.blink .eye::after{
+  display:none;
 }
 
-.walking-cat.sitting .cat-tail{
-    animation:tailSit 2s ease-in-out infinite;
+/* nariz */
+
+.nose{
+  position:absolute;
+  left:43px;
+  top:49px;
+  width:10px;
+  height:7px;
+  background:#b55a70;
+  border-radius:50% 50% 55% 55%;
 }
 
-@keyframes tailSit{
-    0%,100%{transform:rotate(5deg)}
-    50%{transform:rotate(22deg)}
+/* boca */
+
+.mouth{
+  position:absolute;
+  left:46px;
+  top:55px;
+  width:4px;
+  height:8px;
+  border-left:1px solid #b87b8a;
+  border-bottom:1px solid #b87b8a;
+  transform:rotate(-45deg);
 }
 
-/* burbuja */
-.cat-bubble{
-    position:absolute;
-    left:105px;
-    top:-8px;
-    min-width:90px;
-    max-width:150px;
-    padding:7px 11px;
-    border-radius:14px 14px 14px 3px;
-    background:rgba(10,5,7,.9);
-    border:1px solid rgba(215,181,109,.3);
-    color:#f1dfbd;
-    font-family:Arial,sans-serif;
-    font-size:11px;
-    text-align:center;
-    opacity:0;
-    transform:translateY(5px) scale(.9);
-    transition:.25s;
-    pointer-events:none;
-    box-shadow:0 5px 20px rgba(0,0,0,.4);
+/* bigotitos */
+
+.whisker{
+  position:absolute;
+  width:30px;
+  height:1px;
+  background:rgba(232,214,219,.55);
+  top:54px;
 }
 
-.cat-bubble.show{
-    opacity:1;
-    transform:translateY(0) scale(1);
+.w1{
+  left:-21px;
+  transform:rotate(8deg);
 }
 
-/* maullido visual */
-.meow-pop{
-    position:fixed;
-    z-index:350;
-    pointer-events:none;
-    color:var(--gold);
-    font-size:14px;
-    font-style:italic;
-    animation:meowPop 1.2s ease-out forwards;
+.w2{
+  left:-23px;
+  top:61px;
+  transform:rotate(-7deg);
 }
 
-@keyframes meowPop{
-    from{
-        opacity:0;
-        transform:translateY(10px) scale(.7);
-    }
-    20%{opacity:1}
-    to{
-        opacity:0;
-        transform:translateY(-40px) scale(1.1);
-    }
+.w3{
+  right:-21px;
+  transform:rotate(-8deg);
+}
+
+.w4{
+  right:-23px;
+  top:61px;
+  transform:rotate(7deg);
+}
+
+/* patitas cortas */
+
+.leg{
+  position:absolute;
+  width:18px;
+  height:34px;
+  top:103px;
+  background:#151113;
+  border-radius:12px 12px 9px 9px;
+  z-index:1;
+  transform-origin:top center;
+}
+
+.leg.left{
+  left:39px;
+}
+
+.leg.right{
+  left:64px;
+}
+
+.cat.walking .leg.left{
+  animation:walkLeft .28s infinite alternate ease-in-out;
+}
+
+.cat.walking .leg.right{
+  animation:walkRight .28s infinite alternate ease-in-out;
+}
+
+@keyframes walkLeft{
+  from{transform:rotate(15deg) translateY(0)}
+  to{transform:rotate(-15deg) translateY(-3px)}
+}
+
+@keyframes walkRight{
+  from{transform:rotate(-15deg) translateY(-3px)}
+  to{transform:rotate(15deg) translateY(0)}
+}
+
+/* cola */
+
+.tail{
+  position:absolute;
+  width:55px;
+  height:48px;
+  left:75px;
+  top:65px;
+  border:9px solid #151113;
+  border-left:0;
+  border-bottom:0;
+  border-radius:0 45px 0 0;
+  transform-origin:left bottom;
+  z-index:1;
+  animation:tailMove 1.4s ease-in-out infinite;
+}
+
+@keyframes tailMove{
+  0%,100%{transform:rotate(8deg)}
+  50%{transform:rotate(-12deg)}
+}
+
+/* collar y cascabel */
+
+.collar{
+  position:absolute;
+  width:61px;
+  height:9px;
+  left:29px;
+  top:82px;
+  border-radius:10px;
+  background:#7d2032;
+  z-index:7;
+}
+
+.bell{
+  position:absolute;
+  width:13px;
+  height:13px;
+  left:53px;
+  top:88px;
+  border-radius:50%;
+  background:var(--gold);
+  border:2px solid #9c7940;
+  z-index:8;
+  box-shadow:0 0 9px rgba(215,181,109,.4);
+}
+
+/* equipo de construcción oculto en gato normal */
+
+.catBuilder{
+  position:absolute;
+  inset:0;
+  z-index:20;
+  pointer-events:none;
+  display:none;
+}
+
+.builderCat .catBuilder{
+  display:block;
+}
+
+.hardHat{
+  position:absolute;
+  width:58px;
+  height:22px;
+  left:31px;
+  top:0;
+  background:#d7b56d;
+  border-radius:28px 28px 5px 5px;
+  border-bottom:5px solid #9c7940;
+}
+
+.hardHat::after{
+  content:"";
+  position:absolute;
+  left:-7px;
+  bottom:-6px;
+  width:72px;
+  height:7px;
+  border-radius:8px;
+  background:#c59d4e;
+}
+
+.tool{
+  position:absolute;
+  font-size:27px;
+  left:80px;
+  top:58px;
+  transform:rotate(-25deg);
 }
 
 /* =========================
-   FOOTER
+   PANELES
 ========================= */
 
-.footer{
-    text-align:center;
-    margin:55px auto 0;
-    opacity:.4;
-    font-family:Arial,sans-serif;
-    font-size:11px;
-    letter-spacing:1px;
+.panelOverlay{
+  position:fixed;
+  inset:0;
+  z-index:3000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(0,0,0,.72);
+  backdrop-filter:blur(8px);
+}
+
+.panelOverlay.open{
+  display:flex;
+}
+
+.panel{
+  position:relative;
+  width:min(520px,94vw);
+  max-height:82vh;
+  overflow:auto;
+  padding:35px 28px;
+  border-radius:22px;
+  border:1px solid rgba(215,181,109,.25);
+  background:
+    linear-gradient(145deg,#1b0d12,#0d080a);
+  box-shadow:0 30px 90px rgba(0,0,0,.7);
+  text-align:center;
+}
+
+.closePanel{
+  position:absolute;
+  right:16px;
+  top:12px;
+  width:35px;
+  height:35px;
+  border:0;
+  border-radius:50%;
+  background:rgba(255,255,255,.05);
+  color:var(--white);
+  font-size:25px;
+}
+
+.closePanel:hover{
+  background:rgba(125,32,50,.4);
+}
+
+.panel h2{
+  margin-top:5px;
+  color:var(--gold2);
+  font-weight:normal;
+}
+
+.panel p{
+  color:var(--muted);
+  line-height:1.7;
+}
+
+.memoryCard{
+  min-height:130px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:25px;
+  margin:25px 0 12px;
+  border-radius:16px;
+  border:1px solid rgba(215,181,109,.15);
+  background:rgba(255,255,255,.025);
+  color:#eee1e5;
+  line-height:1.7;
+}
+
+.memoryNumber{
+  color:var(--gold);
+  font-size:13px;
+  margin-bottom:18px;
+}
+
+.actionBtn{
+  border:1px solid rgba(215,181,109,.35);
+  border-radius:12px;
+  padding:11px 20px;
+  background:rgba(125,32,50,.25);
+  color:var(--gold2);
+  transition:.2s;
+}
+
+.actionBtn:hover{
+  background:rgba(125,32,50,.5);
+  transform:translateY(-2px);
+}
+
+.nameInput{
+  width:100%;
+  padding:13px 15px;
+  border-radius:12px;
+  border:1px solid rgba(215,181,109,.2);
+  outline:none;
+  background:#090608;
+  color:white;
+  margin:15px 0;
+}
+
+.nameInput:focus{
+  border-color:var(--gold);
+}
+
+.savedName{
+  min-height:25px;
+  margin-top:15px;
+  color:var(--pink);
+}
+
+/* =========================
+   BUILDING
+========================= */
+
+#buildOverlay{
+  position:fixed;
+  inset:0;
+  z-index:4000;
+  display:none;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 35%,#291016 0%,#0c080a 52%,#030304 100%);
+}
+
+#buildOverlay.open{
+  display:block;
+}
+
+.buildHeader{
+  position:absolute;
+  top:40px;
+  left:50%;
+  transform:translateX(-50%);
+  text-align:center;
+  z-index:20;
+}
+
+.tiny{
+  color:var(--gold);
+  letter-spacing:4px;
+  font-size:10px;
+  margin-bottom:8px;
+}
+
+.buildHeader h2{
+  margin:0;
+  color:var(--gold2);
+  font-weight:normal;
+}
+
+.buildHeader p{
+  color:var(--muted);
+  margin-top:8px;
+}
+
+.buildGround{
+  position:absolute;
+  left:5%;
+  right:5%;
+  bottom:90px;
+  height:2px;
+  background:linear-gradient(
+    90deg,
+    transparent,
+    rgba(215,181,109,.4),
+    transparent
+  );
+}
+
+.builderCat{
+  position:absolute;
+  width:120px;
+  height:135px;
+  left:8%;
+  bottom:100px;
+  z-index:15;
+  transition:left 1.2s ease;
+}
+
+.builderCat .catVisual{
+  transform:scaleX(1);
+}
+
+/* bloques */
+
+.building{
+  position:absolute;
+  left:50%;
+  bottom:92px;
+  transform:translateX(-50%);
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  gap:22px;
+  min-width:370px;
+  height:270px;
+}
+
+.letterBuild{
+  position:relative;
+  width:110px;
+  height:250px;
+}
+
+.block{
+  position:absolute;
+  width:14px;
+  height:14px;
+  border-radius:3px;
+  background:linear-gradient(145deg,#f0d38d,#a77e38);
+  box-shadow:
+    0 0 7px rgba(215,181,109,.18),
+    inset 1px 1px 2px rgba(255,255,255,.3);
+  opacity:0;
+  transform:translateY(35px) scale(.7);
+}
+
+.block.show{
+  opacity:1;
+  transform:translateY(0) scale(1);
+  transition:
+    opacity .25s ease,
+    transform .25s cubic-bezier(.2,.8,.2,1);
+}
+
+.buildFinish{
+  position:absolute;
+  left:50%;
+  bottom:32px;
+  transform:translateX(-50%) translateY(20px);
+  opacity:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:5px;
+  transition:.8s;
+  text-align:center;
+}
+
+.buildFinish.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+
+.buildFinish strong{
+  color:var(--gold2);
+  font-size:24px;
+}
+
+.buildFinish span{
+  color:var(--muted);
+  font-size:13px;
+}
+
+.buildClose{
+  position:absolute;
+  top:18px;
+  right:18px;
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  border:1px solid rgba(215,181,109,.25);
+  background:rgba(0,0,0,.3);
+  color:var(--white);
+  font-size:25px;
+  z-index:50;
+}
+
+/* =========================
+   EFECTOS
+========================= */
+
+.floatMessage{
+  position:fixed;
+  z-index:500;
+  pointer-events:none;
+  color:var(--gold2);
+  font-size:16px;
+  text-shadow:0 2px 10px #000;
+  animation:floatUp 2.2s ease forwards;
+}
+
+@keyframes floatUp{
+  0%{
+    opacity:0;
+    transform:translateY(10px) scale(.8);
+  }
+  15%{
+    opacity:1;
+  }
+  100%{
+    opacity:0;
+    transform:translateY(-80px) scale(1.08);
+  }
+}
+
+.heart{
+  position:fixed;
+  z-index:450;
+  pointer-events:none;
+  animation:heartFloat 2.5s ease forwards;
+}
+
+@keyframes heartFloat{
+  0%{
+    opacity:0;
+    transform:translateY(0) scale(.5);
+  }
+  15%{
+    opacity:1;
+  }
+  100%{
+    opacity:0;
+    transform:translateY(-130px) translateX(var(--drift)) scale(1.2);
+  }
+}
+
+.spark{
+  position:fixed;
+  z-index:450;
+  pointer-events:none;
+  color:var(--gold2);
+  animation:sparkFloat 1.4s ease forwards;
+}
+
+@keyframes sparkFloat{
+  from{
+    opacity:1;
+    transform:scale(.5) rotate(0);
+  }
+  to{
+    opacity:0;
+    transform:translateY(-50px) scale(1.5) rotate(90deg);
+  }
+}
+
+.rainItem{
+  position:fixed;
+  top:-30px;
+  z-index:4500;
+  pointer-events:none;
+  animation:rainFall linear forwards;
+}
+
+@keyframes rainFall{
+  to{
+    transform:translateY(110vh) rotate(360deg);
+    opacity:0;
+  }
+}
+
+/* =========================
+   INTRO
+========================= */
+
+.introFlash{
+  position:fixed;
+  inset:0;
+  z-index:4500;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  pointer-events:none;
+  background:#050405;
+  opacity:1;
+  transition:opacity 1s ease;
+}
+
+.introFlash.hide{
+  opacity:0;
+}
+
+.introText{
+  text-align:center;
+  animation:introAppear 1.3s ease;
+}
+
+.introText div{
+  color:var(--gold);
+  font-size:11px;
+  letter-spacing:4px;
+  margin-bottom:12px;
+}
+
+.introText strong{
+  font-size:40px;
+  font-weight:normal;
+  color:#f1d7df;
+}
+
+@keyframes introAppear{
+  from{
+    opacity:0;
+    transform:scale(.9);
+  }
+  to{
+    opacity:1;
+    transform:scale(1);
+  }
 }
 
 /* =========================
@@ -542,1185 +1057,1418 @@ body{
 ========================= */
 
 @media(max-width:600px){
-    #mainContent{
-        padding-top:55px;
-    }
 
-    .walking-cat{
-        width:125px;
-        height:125px;
-    }
+  .content{
+    padding-top:72px;
+  }
 
-    .cat-bubble{
-        left:90px;
-        top:0;
-    }
+  .letter{
+    margin-top:25px;
+    line-height:1.7;
+  }
 
-    .letter{
-        padding:30px 21px;
-    }
+  .bottomMenu{
+    gap:2px;
+  }
 
-    .letter p{
-        font-size:16px;
-        line-height:1.8;
-    }
+  .menuBtn span{
+    font-size:18px;
+  }
 
-    .hero h1{
-        font-size:46px;
-    }
+  .menuBtn small{
+    font-size:9px;
+  }
+
+  .building{
+    transform:translateX(-50%) scale(.78);
+    transform-origin:bottom center;
+  }
+
+  .builderCat{
+    left:3%;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div class="bg-glow"></div>
+<!-- =========================
+     PIN
+========================= -->
 
-<!-- Partículas -->
-<div id="particles"></div>
+<div id="lockScreen">
+
+  <div class="lockBox">
+
+    <div class="lockSymbol">🖤</div>
+
+    <h1>Para Alis</h1>
+
+    <p>Hay algo aquí esperando por ti.</p>
+
+    <div class="pinDots">
+      <div class="pinDot"></div>
+      <div class="pinDot"></div>
+      <div class="pinDot"></div>
+      <div class="pinDot"></div>
+      <div class="pinDot"></div>
+      <div class="pinDot"></div>
+    </div>
+
+    <div class="keypad">
+      <button class="key" onclick="pressKey('1')">1</button>
+      <button class="key" onclick="pressKey('2')">2</button>
+      <button class="key" onclick="pressKey('3')">3</button>
+      <button class="key" onclick="pressKey('4')">4</button>
+      <button class="key" onclick="pressKey('5')">5</button>
+      <button class="key" onclick="pressKey('6')">6</button>
+      <button class="key" onclick="pressKey('7')">7</button>
+      <button class="key" onclick="pressKey('8')">8</button>
+      <button class="key" onclick="pressKey('9')">9</button>
+      <button class="key" onclick="clearPin()">⌫</button>
+      <button class="key" onclick="pressKey('0')">0</button>
+      <button class="key" onclick="clearPin()">×</button>
+    </div>
+
+    <div id="pinError" class="pinError"></div>
+
+  </div>
+
+</div>
 
 <!-- =========================
      AUDIO
 ========================= -->
 
 <audio id="music" src="Musica.mp3" loop preload="auto"></audio>
-<audio id="bell" src="Cascabel.mp3" preload="auto"></audio>
 <audio id="meow" src="Maullido.mp3" preload="auto"></audio>
+<audio id="bellSound" src="Cascabel.mp3" preload="auto"></audio>
 
 <!-- =========================
-     PIN
+     APP
 ========================= -->
 
-<section id="lockScreen">
+<div id="app">
 
-    <div class="lock-box" id="lockBox">
+  <div class="topBar">
 
-        <div class="lock-cat">🐈‍⬛</div>
+    <button class="topBtn" id="musicButton" onclick="toggleMusic()" title="Música">
+      ▶
+    </button>
 
-        <h1>Para Alis</h1>
+    <button class="topBtn" onclick="emojiRain()" title="Lluvia">
+      ✦
+    </button>
 
-        <p>Hay algo aquí que solo tú puedes abrir.</p>
+  </div>
 
-        <div class="pin-display" id="pinDisplay">
-            <span class="pin-dot"></span>
-            <span class="pin-dot"></span>
-            <span class="pin-dot"></span>
-            <span class="pin-dot"></span>
-            <span class="pin-dot"></span>
-            <span class="pin-dot"></span>
-        </div>
+  <div class="content">
 
-        <div class="pin-keypad">
+    <div class="title">
 
-            <button class="pin-key" data-number="1">1</button>
-            <button class="pin-key" data-number="2">2</button>
-            <button class="pin-key" data-number="3">3</button>
+      <div class="eyebrow">Para alguien especial</div>
 
-            <button class="pin-key" data-number="4">4</button>
-            <button class="pin-key" data-number="5">5</button>
-            <button class="pin-key" data-number="6">6</button>
+      <h1>Alis 🖤</h1>
 
-            <button class="pin-key" data-number="7">7</button>
-            <button class="pin-key" data-number="8">8</button>
-            <button class="pin-key" data-number="9">9</button>
-
-            <button class="pin-key zero" data-number="0">0</button>
-
-        </div>
-
-        <div class="pin-error" id="pinError"></div>
+      <p>Un pequeño rincón hecho para ti.</p>
 
     </div>
 
-</section>
 
-<!-- =========================
-     CONTENIDO
-========================= -->
+    <article class="letter" id="letter">
 
-<main id="mainContent">
+      <p class="name">Alis 🖤</p>
 
-    <button id="musicButton" aria-label="Música">♫</button>
+      <p>
+        Hay personas que llegan y simplemente pasan por tu vida… y luego estás tú.
+      </p>
 
-    <section class="hero">
+      <p>
+        Te llevo recorriendo mis venas, en mis pensamientos más tranquilos y en esos pequeños momentos del día en los que, sin buscarlo, terminas apareciendo tú.
+      </p>
 
-        <div class="small">Una pequeña sorpresa</div>
+      <p>
+        Me gusta compartir mi tiempo contigo, hablar contigo, reírnos de cualquier tontería y simplemente disfrutar de tu compañía.
+      </p>
 
-        <h1>Para Alis 🖤</h1>
+      <p>
+        No sé en qué momento te fuiste haciendo un espacio tan bonito dentro de mí, pero me alegra que estés ahí.
+      </p>
 
-        <p>Porque entre tantas personas, qué bonito que seas tú.</p>
+      <p>
+        Y quizá eso es lo que quería dejarte aquí: un pequeño pedacito de todo lo que significas para mí.
+      </p>
 
-        <div class="heart-line"></div>
+      <p>
+        Porque entre tantas personas, qué bonito que seas tú.
+      </p>
 
-    </section>
+      <p>
+        Y sí… <strong>amo mucho a mi mascotita. Amo mucho a mi Alis. Mi mujer, mi todo.</strong> 🖤
+      </p>
 
-    <section class="letter">
+    </article>
 
-        <h2>Alis 🖤</h2>
+  </div>
 
-        <p>
-            Hay personas que llegan y simplemente pasan por tu vida… y luego estás tú.
-        </p>
+  <!-- =========================
+       GATO NORMAL
+  ========================= -->
 
-        <p>
-            Te llevo recorriendo mis venas, en mis pensamientos más tranquilos y en esos pequeños momentos del día en los que, sin buscarlo, terminas apareciendo tú.
-        </p>
+  <div class="cat" id="cat">
 
-        <p>
-            Me gusta compartir mi tiempo contigo, hablar contigo, reírnos de cualquier tontería y simplemente disfrutar de tu compañía.
-        </p>
+    <div class="catVisual">
 
-        <p>
-            No sé en qué momento te fuiste haciendo un espacio tan bonito dentro de mí, pero me alegra que estés ahí.
-        </p>
+      <div class="tail"></div>
 
-        <p>
-            Y quizá eso es lo que quería dejarte aquí: un pequeño pedacito de todo lo que significas para mí.
-        </p>
+      <div class="catBody"></div>
 
-        <p>
-            Porque entre tantas personas, qué bonito que seas tú.
-        </p>
+      <div class="leg left"></div>
+      <div class="leg right"></div>
 
-        <p>
-            Y sí… amo mucho a mi mascotita. Amo mucho a mi Alis. Mi mujer, mi todo. 🖤
-        </p>
+      <div class="catHead">
 
-        <div class="signature">
-            — Con mucho amor 🖤
-        </div>
+        <div class="ear left"></div>
+        <div class="ear right"></div>
 
-    </section>
+        <div class="eye left"></div>
+        <div class="eye right"></div>
 
-    <div class="footer">
-        Hecho especialmente para Alis
+        <div class="nose"></div>
+        <div class="mouth"></div>
+
+        <div class="whisker w1"></div>
+        <div class="whisker w2"></div>
+        <div class="whisker w3"></div>
+        <div class="whisker w4"></div>
+
+      </div>
+
+      <div class="collar"></div>
+      <div class="bell"></div>
+
+      <div class="catBuilder">
+        <div class="hardHat"></div>
+        <div class="tool">🔨</div>
+      </div>
+
     </div>
 
-</main>
+  </div>
+
+  <!-- =========================
+       MENU
+  ========================= -->
+
+  <div class="bottomMenu">
+
+    <button class="menuBtn" onclick="openLetter()">
+      <span>💌</span>
+      <small>Carta</small>
+    </button>
+
+    <button class="menuBtn" onclick="openPanel('usPanel')">
+      <span>🖤</span>
+      <small>Nosotros</small>
+    </button>
+
+    <button class="menuBtn" onclick="startBuilding()">
+      <span>🧱</span>
+      <small>Sorpresa</small>
+    </button>
+
+    <button class="menuBtn" onclick="giveMimos()">
+      <span>🐾</span>
+      <small>Mimos</small>
+    </button>
+
+    <button class="menuBtn" onclick="openPanel('namePanel')">
+      <span>🏷️</span>
+      <small>Nombre</small>
+    </button>
+
+  </div>
+
+</div>
 
 <!-- =========================
-     GATO ANIMADO
+     NOSOTROS
 ========================= -->
 
-<div class="walking-cat" id="walkingCat">
+<div class="panelOverlay" id="usPanel">
 
-    <div class="cat-bubble" id="catBubble">miau ♡</div>
+  <div class="panel">
 
-    <svg class="cat-svg"
-         viewBox="0 0 150 150"
-         xmlns="http://www.w3.org/2000/svg">
+    <button class="closePanel" onclick="closePanel('usPanel')">×</button>
 
-        <!-- Cola -->
-        <g class="cat-tail">
-            <path
-                d="M105 91
-                   C125 91 132 76 125 64
-                   C120 55 111 57 114 65
-                   C117 73 121 78 114 82"
-                fill="none"
-                stroke="#090909"
-                stroke-width="10"
-                stroke-linecap="round"
-                stroke-linejoin="round"/>
-            <path
-                d="M106 90
-                   C125 90 131 76 125 65"
-                fill="none"
-                stroke="#5f2036"
-                stroke-width="2"
-                opacity=".7"/>
-        </g>
+    <h2>Nosotros 🖤</h2>
 
-        <!-- Cuerpo -->
-        <g class="cat-body">
+    <p>
+      Porque algunas cosas no necesitan una explicación enorme.
+      A veces simplemente se disfrutan.
+    </p>
 
-            <ellipse
-                cx="78"
-                cy="91"
-                rx="38"
-                ry="29"
-                fill="#080808"
-                stroke="#171717"
-                stroke-width="2"/>
+    <div class="memoryCard" id="memoryCard">
+      Hay personas que llegan y hacen que un día cualquiera se sienta diferente.
+    </div>
 
-            <!-- brillo del lomo -->
-            <path
-                d="M50 79 C65 66 91 66 105 80"
-                fill="none"
-                stroke="#38111e"
-                stroke-width="3"
-                opacity=".65"/>
+    <div class="memoryNumber" id="memoryNumber">
+      1 / 10
+    </div>
 
-            <!-- pata trasera -->
-            <g class="leg-back">
-                <path
-                    d="M62 103 L59 128
-                       Q59 134 65 134
-                       L72 134
-                       Q75 132 72 129
-                       L69 126
-                       L73 103"
-                    fill="#080808"
-                    stroke="#171717"
-                    stroke-width="2"/>
-            </g>
+    <button class="actionBtn" onclick="nextMemory()">
+      Otra cosa
+    </button>
 
-            <!-- pata trasera 2 -->
-            <g class="leg-back">
-                <path
-                    d="M78 105 L77 130
-                       Q77 135 83 135
-                       L90 135
-                       Q93 132 89 129
-                       L86 126
-                       L90 104"
-                    fill="#080808"
-                    stroke="#171717"
-                    stroke-width="2"/>
-            </g>
+  </div>
 
-            <!-- pata delantera -->
-            <g class="leg-front">
-                <path
-                    d="M91 99 L94 127
-                       Q95 133 101 133
-                       L107 133
-                       Q110 130 106 128
-                       L102 125
-                       L104 99"
-                    fill="#080808"
-                    stroke="#171717"
-                    stroke-width="2"/>
-            </g>
+</div>
 
-            <!-- pecho -->
-            <path
-                d="M91 77
-                   Q83 91 91 105"
-                fill="none"
-                stroke="#391320"
-                stroke-width="3"
-                opacity=".55"/>
+<!-- =========================
+     NOMBRE
+========================= -->
 
-            <!-- cabeza -->
-            <ellipse
-                cx="50"
-                cy="65"
-                rx="31"
-                ry="27"
-                fill="#070707"
-                stroke="#171717"
-                stroke-width="2"/>
+<div class="panelOverlay" id="namePanel">
 
-            <!-- oreja izquierda -->
-            <path
-                class="cat-ear"
-                d="M27 48 L28 19
-                   Q29 14 34 19
-                   L48 40 Z"
-                fill="#080808"
-                stroke="#171717"
-                stroke-width="2"/>
+  <div class="panel">
 
-            <path
-                d="M31 39 L31 25 L41 40 Z"
-                fill="#58172d"
-                opacity=".8"/>
+    <button class="closePanel" onclick="closePanel('namePanel')">×</button>
 
-            <!-- oreja derecha -->
-            <path
-                class="cat-ear"
-                d="M52 40 L67 18
-                   Q70 14 71 21
-                   L72 49 Z"
-                fill="#080808"
-                stroke="#171717"
-                stroke-width="2"/>
+    <h2>¿Cómo me vas a llamar? 🐈</h2>
 
-            <path
-                d="M61 39 L68 25 L69 43 Z"
-                fill="#58172d"
-                opacity=".8"/>
+    <p>
+      Ponle un nombre al gato. Se quedará guardado aunque cierres la página.
+    </p>
 
-            <!-- cara -->
-            <ellipse
-                cx="41"
-                cy="65"
-                rx="4"
-                ry="5"
-                fill="#d7b56d"
-                class="cat-eye"/>
+    <input
+      id="catNameInput"
+      class="nameInput"
+      maxlength="18"
+      placeholder="Escribe un nombre..."
+    >
 
-            <ellipse
-                cx="61"
-                cy="65"
-                rx="4"
-                ry="5"
-                fill="#d7b56d"
-                class="cat-eye"/>
+    <button class="actionBtn" onclick="saveCatName()">
+      Poner nombre
+    </button>
 
-            <!-- pupilas -->
-            <ellipse
-                cx="41"
-                cy="66"
-                rx="1.5"
-                ry="4"
-                fill="#050505"
-                class="cat-eye"/>
+    <div class="savedName" id="savedName"></div>
 
-            <ellipse
-                cx="61"
-                cy="66"
-                rx="1.5"
-                ry="4"
-                fill="#050505"
-                class="cat-eye"/>
+  </div>
 
-            <!-- nariz -->
-            <path
-                d="M49 72 Q52 70 55 72 Q52 76 49 72"
-                fill="#a34865"/>
+</div>
 
-            <!-- boca -->
-            <path
-                d="M52 75 Q50 79 47 78
-                   M52 75 Q54 79 57 78"
-                fill="none"
-                stroke="#9b3152"
-                stroke-width="1.4"
-                stroke-linecap="round"/>
+<!-- =========================
+     CONSTRUCCIÓN
+========================= -->
 
-            <!-- bigotes -->
-            <g stroke="#9d8c7b" stroke-width="1" opacity=".65">
-                <path d="M31 71 L10 67"/>
-                <path d="M31 76 L9 78"/>
-                <path d="M70 71 L90 66"/>
-                <path d="M70 76 L91 78"/>
-            </g>
+<div id="buildOverlay">
 
-            <!-- pecho -->
-            <path
-                d="M32 84 Q49 94 67 84"
-                fill="none"
-                stroke="#4a1929"
-                stroke-width="2"
-                opacity=".5"/>
+  <button class="buildClose" onclick="closeBuilding()">×</button>
 
-        </g>
+  <div class="buildHeader">
 
-    </svg>
+    <div class="tiny">PROYECTO ESPECIAL</div>
+
+    <h2>Construyendo para Alis</h2>
+
+    <p id="buildSubtitle">
+      El gato ha decidido ponerse a trabajar.
+    </p>
+
+  </div>
+
+  <div class="buildGround"></div>
+
+  <!-- bloques creados por JS -->
+
+  <div class="building" id="building"></div>
+
+  <div class="builderCat" id="builderCat">
+
+    <div class="catVisual">
+
+      <div class="tail"></div>
+
+      <div class="catBody"></div>
+
+      <div class="leg left"></div>
+      <div class="leg right"></div>
+
+      <div class="catHead">
+
+        <div class="ear left"></div>
+        <div class="ear right"></div>
+
+        <div class="eye left"></div>
+        <div class="eye right"></div>
+
+        <div class="nose"></div>
+        <div class="mouth"></div>
+
+        <div class="whisker w1"></div>
+        <div class="whisker w2"></div>
+        <div class="whisker w3"></div>
+        <div class="whisker w4"></div>
+
+      </div>
+
+      <div class="collar"></div>
+      <div class="bell"></div>
+
+      <div class="catBuilder">
+        <div class="hardHat"></div>
+        <div class="tool">🔨</div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="buildFinish" id="buildFinish">
+
+    <strong>AxK &lt;3</strong>
+
+    <span>Construido para Alis 🖤</span>
+
+  </div>
 
 </div>
 
 <script>
-/* =====================================================
-   CONFIGURACIÓN
-===================================================== */
 
-const CORRECT_PIN = "101010";
+/* =========================
+   VARIABLES
+========================= */
 
-/* =====================================================
-   ELEMENTOS
-===================================================== */
-
-const lockScreen = document.getElementById("lockScreen");
-const lockBox = document.getElementById("lockBox");
-const mainContent = document.getElementById("mainContent");
-
-const pinDots = document.querySelectorAll(".pin-dot");
-const pinError = document.getElementById("pinError");
-const pinKeys = document.querySelectorAll(".pin-key");
-
-const music = document.getElementById("music");
-const bell = document.getElementById("bell");
-const meow = document.getElementById("meow");
-const musicButton = document.getElementById("musicButton");
-
-const cat = document.getElementById("walkingCat");
-const catBubble = document.getElementById("catBubble");
-
-/* =====================================================
-   ESTADO
-===================================================== */
+const PIN = "101010";
 
 let enteredPin = "";
-let unlocked = false;
 let musicPlaying = false;
+let memoryIndex = 0;
+let buildStarted = false;
 
-let catX = 100;
-let catY = 250;
+const music = document.getElementById("music");
+const meow = document.getElementById("meow");
+const bellSound = document.getElementById("bellSound");
 
-let targetX = 100;
-let targetY = 250;
+const cat = document.getElementById("cat");
+
+let catX = window.innerWidth * .5;
+let catY = window.innerHeight * .65;
 
 let catDirection = 1;
-
-let catState = "walking";
+let catMoving = true;
 
 let dragging = false;
 let dragOffsetX = 0;
 let dragOffsetY = 0;
 
-let lastFrame = performance.now();
-let lastMeow = 0;
-let bubbleTimer = null;
-let nextDecision = 0;
 
-const catMessages = [
-    "miau ♡",
-    "hola, Alis",
-    "mrr...",
-    "te estaba buscando",
-    "♡",
-    "miau miau",
-    "aquí estoy",
-    "mi humana favorita ♡"
-];
-
-/* =====================================================
-   PARTÍCULAS
-===================================================== */
-
-function createParticles(){
-
-    const container = document.getElementById("particles");
-
-    for(let i=0;i<28;i++){
-
-        const p = document.createElement("div");
-
-        p.className = "particle";
-
-        p.style.left = Math.random()*100 + "%";
-        p.style.animationDuration = (7 + Math.random()*12) + "s";
-        p.style.animationDelay = (-Math.random()*15) + "s";
-
-        const size = 1 + Math.random()*3;
-
-        p.style.width = size + "px";
-        p.style.height = size + "px";
-
-        container.appendChild(p);
-    }
-}
-
-createParticles();
-
-/* =====================================================
-   AUDIO
-===================================================== */
-
-function playBell(){
-
-    try{
-        bell.currentTime = 0;
-        bell.play().catch(()=>{});
-    }catch(e){}
-}
-
-function startMusic(){
-
-    try{
-
-        music.volume = 0.42;
-
-        const promise = music.play();
-
-        if(promise){
-            promise
-                .then(()=>{
-                    musicPlaying = true;
-                    musicButton.textContent = "❚❚";
-                })
-                .catch(()=>{
-                    musicPlaying = false;
-                    musicButton.textContent = "♫";
-                });
-        }
-
-    }catch(e){}
-}
-
-function stopMusic(){
-
-    music.pause();
-
-    musicPlaying = false;
-
-    musicButton.textContent = "♫";
-}
-
-function playMeow(){
-
-    const now = Date.now();
-
-    if(now - lastMeow < 650){
-        return;
-    }
-
-    lastMeow = now;
-
-    try{
-
-        meow.currentTime = 0;
-        meow.volume = .75;
-
-        const promise = meow.play();
-
-        if(promise){
-            promise.catch(()=>{});
-        }
-
-    }catch(e){}
-
-    showMeowPop();
-
-    createHeart(catX + 60, catY + 50);
-}
-
-function showMeowPop(){
-
-    const pop = document.createElement("div");
-
-    pop.className = "meow-pop";
-
-    pop.textContent = Math.random() > .4 ? "miau ♡" : "mrr~";
-
-    pop.style.left = (catX + 55) + "px";
-    pop.style.top = (catY + 45) + "px";
-
-    document.body.appendChild(pop);
-
-    setTimeout(()=>{
-        pop.remove();
-    },1200);
-}
-
-/* =====================================================
-   MÚSICA MANUAL
-===================================================== */
-
-musicButton.addEventListener("click", ()=>{
-
-    if(!unlocked){
-        return;
-    }
-
-    if(musicPlaying){
-        stopMusic();
-    }else{
-        startMusic();
-    }
-
-});
-
-/* =====================================================
+/* =========================
    PIN
-===================================================== */
+========================= */
 
-pinKeys.forEach(button=>{
+function pressKey(value){
 
-    button.addEventListener("click", ()=>{
+  if(enteredPin.length >= 6) return;
 
-        const number = button.dataset.number;
+  enteredPin += value;
 
-        playBell();
+  playBell();
 
-        if(enteredPin.length >= CORRECT_PIN.length){
-            return;
-        }
+  updatePinDots();
 
-        enteredPin += number;
+  if(enteredPin.length === 6){
 
+    if(enteredPin === PIN){
+
+      unlock();
+
+    }else{
+
+      document.getElementById("pinError").textContent =
+        "Ese no es el código...";
+
+      setTimeout(()=>{
+        enteredPin = "";
         updatePinDots();
+        document.getElementById("pinError").textContent = "";
+      },900);
 
-        if(enteredPin.length === CORRECT_PIN.length){
+    }
 
-            setTimeout(checkPin,100);
+  }
 
-        }
+}
 
-    });
 
-});
+function clearPin(){
+
+  enteredPin = "";
+
+  updatePinDots();
+
+  document.getElementById("pinError").textContent = "";
+
+}
+
 
 function updatePinDots(){
 
-    pinDots.forEach((dot,index)=>{
+  document.querySelectorAll(".pinDot").forEach((dot,index)=>{
 
-        dot.classList.toggle(
-            "active",
-            index < enteredPin.length
-        );
+    dot.classList.toggle(
+      "active",
+      index < enteredPin.length
+    );
 
+  });
+
+}
+
+
+function playBell(){
+
+  try{
+
+    bellSound.currentTime = 0;
+    bellSound.play().catch(()=>{});
+
+  }catch(e){}
+
+}
+
+
+/* =========================
+   DESBLOQUEO
+========================= */
+
+function unlock(){
+
+  /*
+    Se intenta iniciar la música directamente desde
+    la interacción del teclado para evitar problemas
+    de autoplay.
+  */
+
+  music.volume = .42;
+
+  music.play()
+    .then(()=>{
+      musicPlaying = true;
+      updateMusicButton();
+    })
+    .catch(()=>{
+      musicPlaying = false;
+      updateMusicButton();
     });
 
+  const lock = document.getElementById("lockScreen");
+  const app = document.getElementById("app");
+
+  lock.classList.add("hidden");
+  app.classList.add("visible");
+
+  setTimeout(()=>{
+    document.querySelector(".introFlash").classList.add("hide");
+
+    setTimeout(()=>{
+      document.querySelector(".introFlash")?.remove();
+    },1100);
+
+  },300);
+
+  startCat();
+
 }
 
-function checkPin(){
 
-    if(enteredPin === CORRECT_PIN){
+/* =========================
+   MÚSICA
+========================= */
 
-        unlocked = true;
+function toggleMusic(){
 
-        pinError.textContent = "";
+  if(music.paused){
 
-        /*
-           Importante:
-           la música empieza directamente después
-           del gesto de introducir el PIN.
-        */
-        startMusic();
+    music.play()
+      .then(()=>{
+        musicPlaying = true;
+        updateMusicButton();
+      })
+      .catch(()=>{});
 
-        lockScreen.classList.add("hidden");
+  }else{
 
-        setTimeout(()=>{
-            mainContent.classList.add("visible");
-            startCat();
-        },500);
+    music.pause();
+    musicPlaying = false;
+    updateMusicButton();
 
-        setTimeout(()=>{
-            showBubble("hola, Alis 🖤");
-        },1500);
+  }
 
-        setTimeout(()=>{
-            playMeow();
-        },2200);
+}
 
-        setTimeout(()=>{
-            autonomousMeow();
-        },9000);
 
-    }else{
+function updateMusicButton(){
 
-        pinError.textContent = "Mmm… ese no es. 🖤";
+  document.getElementById("musicButton").textContent =
+    musicPlaying ? "❚❚" : "▶";
 
-        lockBox.classList.remove("shake");
+}
 
-        void lockBox.offsetWidth;
 
-        lockBox.classList.add("shake");
+/* =========================
+   CARTA
+========================= */
 
-        enteredPin = "";
+function openLetter(){
 
-        updatePinDots();
+  const letter = document.getElementById("letter");
 
-        setTimeout(()=>{
-            pinError.textContent = "";
-        },1200);
+  letter.scrollIntoView({
+    behavior:"smooth",
+    block:"center"
+  });
 
+  createHearts(
+    window.innerWidth / 2,
+    window.innerHeight / 2,
+    7
+  );
+
+}
+
+
+/* =========================
+   PANELES
+========================= */
+
+function openPanel(id){
+
+  document.getElementById(id).classList.add("open");
+
+}
+
+
+function closePanel(id){
+
+  document.getElementById(id).classList.remove("open");
+
+}
+
+
+/* cerrar haciendo clic fuera */
+
+document.querySelectorAll(".panelOverlay").forEach(overlay=>{
+
+  overlay.addEventListener("click",(event)=>{
+
+    if(event.target === overlay){
+      overlay.classList.remove("open");
     }
 
-}
-
-/* =====================================================
-   GATO — MOVIMIENTO
-===================================================== */
-
-function getCatSize(){
-
-    return {
-        width:cat.offsetWidth || 145,
-        height:cat.offsetHeight || 145
-    };
-
-}
-
-function getBounds(){
-
-    const size = getCatSize();
-
-    return {
-        minX:8,
-        maxX:Math.max(8,window.innerWidth - size.width - 8),
-        minY:70,
-        maxY:Math.max(70,window.innerHeight - size.height - 15)
-    };
-
-}
-
-function chooseNewTarget(){
-
-    const bounds = getBounds();
-
-    targetX =
-        bounds.minX +
-        Math.random() *
-        (bounds.maxX - bounds.minX);
-
-    targetY =
-        bounds.minY +
-        Math.random() *
-        (bounds.maxY - bounds.minY);
-
-    if(Math.abs(targetX-catX) < 70){
-
-        targetX =
-            Math.min(
-                bounds.maxX,
-                Math.max(bounds.minX,targetX + 100)
-            );
-
-    }
-
-    catDirection =
-        targetX >= catX ? 1 : -1;
-
-    nextDecision =
-        performance.now() +
-        2800 +
-        Math.random()*4200;
-
-    cat.classList.remove("sitting");
-
-    catState = "walking";
-}
-
-function startCat(){
-
-    const bounds = getBounds();
-
-    catX = bounds.minX + 20;
-    catY = Math.min(
-        bounds.maxY,
-        bounds.minY + 100
-    );
-
-    chooseNewTarget();
-
-    requestAnimationFrame(catLoop);
-}
-
-function catLoop(time){
-
-    const dt = Math.min(
-        40,
-        time - lastFrame
-    );
-
-    lastFrame = time;
-
-    if(unlocked && !dragging){
-
-        if(catState === "walking"){
-
-            const dx = targetX - catX;
-            const dy = targetY - catY;
-
-            const distance = Math.sqrt(
-                dx*dx + dy*dy
-            );
-
-            if(distance < 8){
-
-                if(Math.random() < .4){
-
-                    sitCat();
-
-                }else{
-
-                    chooseNewTarget();
-
-                }
-
-            }else{
-
-                const speed =
-                    Math.min(
-                        0.12 * dt,
-                        3.0
-                    );
-
-                catX += (dx/distance) * speed;
-                catY += (dy/distance) * speed;
-
-                catDirection =
-                    dx >= 0 ? 1 : -1;
-
-            }
-
-        }
-
-        if(catState === "sitting"){
-
-            if(time > nextDecision){
-
-                chooseNewTarget();
-
-            }
-
-        }
-
-        if(time > nextDecision &&
-           catState === "walking"){
-
-            if(Math.random() < .25){
-
-                sitCat();
-
-            }else{
-
-                chooseNewTarget();
-
-            }
-
-        }
-
-        applyCatPosition();
-
-    }
-
-    requestAnimationFrame(catLoop);
-
-}
-
-function sitCat(){
-
-    catState = "sitting";
-
-    cat.classList.add("sitting");
-
-    showBubble(
-        Math.random() > .5
-        ? "mrr... ♡"
-        : "descansando..."
-    );
-
-    nextDecision =
-        performance.now() +
-        1800 +
-        Math.random()*3000;
-
-    if(Math.random() < .55){
-
-        setTimeout(()=>{
-            if(!dragging && unlocked){
-                playMeow();
-            }
-        },500);
-
-    }
-
-}
-
-function applyCatPosition(){
-
-    cat.style.transform =
-        `translate3d(${catX}px, ${catY}px, 0)
-         scaleX(${catDirection})`;
-
-}
-
-/* =====================================================
-   CAMBIO DE TAMAÑO / ORIENTACIÓN
-===================================================== */
-
-window.addEventListener("resize",()=>{
-
-    const bounds = getBounds();
-
-    catX = Math.min(bounds.maxX,Math.max(bounds.minX,catX));
-    catY = Math.min(bounds.maxY,Math.max(bounds.minY,catY));
-
-    targetX = Math.min(
-        bounds.maxX,
-        Math.max(bounds.minX,targetX)
-    );
-
-    targetY = Math.min(
-        bounds.maxY,
-        Math.max(bounds.minY,targetY)
-    );
-
-    applyCatPosition();
+  });
 
 });
 
-/* =====================================================
-   ARRASTRAR GATO
-===================================================== */
 
-cat.addEventListener("pointerdown",(event)=>{
+/* =========================
+   MEMORIAS
+========================= */
 
-    if(!unlocked){
-        return;
-    }
+const memories = [
 
-    event.preventDefault();
+  "Hay personas que llegan y hacen que un día cualquiera se sienta diferente.",
 
-    dragging = true;
+  "Me gusta la forma en la que podemos hablar de cualquier tontería y terminar riéndonos.",
 
-    cat.classList.add("dragging");
+  "Hay momentos pequeños que terminan convirtiéndose en recuerdos enormes.",
 
-    cat.setPointerCapture(event.pointerId);
+  "Contigo hasta quedarse simplemente hablando se siente como un buen plan.",
 
-    const rect = cat.getBoundingClientRect();
+  "Me gusta tenerte cerca, incluso cuando solamente estamos compartiendo un momento tranquilo.",
 
-    dragOffsetX =
-        event.clientX - rect.left;
+  "No todo lo bonito necesita una explicación. Algunas cosas simplemente se sienten.",
 
-    dragOffsetY =
-        event.clientY - rect.top;
+  "Entre tantas personas que existen en el mundo, qué curioso y qué bonito haberte encontrado.",
 
-    catState = "sitting";
+  "Hay personas que se vuelven parte de nuestros pensamientos sin pedir permiso. Tú eres una de ellas.",
 
-    cat.classList.add("sitting");
+  "Si este pequeño rincón existe, es porque tú también ocupas un pequeño rincón muy bonito dentro de mí.",
 
-    showBubble("¿me vas a llevar? ♡");
+  "Y si tuviera que resumirlo todo en una sola cosa: qué bonito que seas tú, Alis. 🖤"
 
-});
+];
 
-cat.addEventListener("pointermove",(event)=>{
 
-    if(!dragging){
-        return;
-    }
+function nextMemory(){
 
-    event.preventDefault();
+  memoryIndex++;
 
-    const bounds = getBounds();
+  if(memoryIndex >= memories.length){
+    memoryIndex = 0;
+  }
 
-    catX =
-        event.clientX -
-        dragOffsetX;
+  const card = document.getElementById("memoryCard");
+  const number = document.getElementById("memoryNumber");
 
-    catY =
-        event.clientY -
-        dragOffsetY;
+  card.style.opacity = "0";
 
-    catX =
-        Math.min(
-            bounds.maxX,
-            Math.max(bounds.minX,catX)
-        );
+  setTimeout(()=>{
 
-    catY =
-        Math.min(
-            bounds.maxY,
-            Math.max(bounds.minY,catY)
-        );
+    card.textContent = memories[memoryIndex];
 
-    catDirection =
-        event.movementX >= 0 ? 1 : -1;
+    number.textContent =
+      `${memoryIndex + 1} / ${memories.length}`;
 
-    applyCatPosition();
+    card.style.opacity = "1";
 
-});
-
-function releaseCat(event){
-
-    if(!dragging){
-        return;
-    }
-
-    dragging = false;
-
-    cat.classList.remove("dragging");
-
-    try{
-        cat.releasePointerCapture(event.pointerId);
-    }catch(e){}
-
-    playMeow();
-
-    showBubble(
-        Math.random() > .5
-        ? "miau ♡"
-        : "eso fue divertido"
-    );
-
-    createHeart(
-        catX + 60,
-        catY + 60
-    );
-
-    catState = "walking";
-
-    chooseNewTarget();
+  },180);
 
 }
 
-cat.addEventListener("pointerup",releaseCat);
-cat.addEventListener("pointercancel",releaseCat);
 
-/* =====================================================
-   TOCAR / ACARICIAR
-===================================================== */
+/* =========================
+   NOMBRE
+========================= */
 
-cat.addEventListener("click",(event)=>{
+function saveCatName(){
 
-    if(!unlocked){
-        return;
-    }
+  const input = document.getElementById("catNameInput");
+  const name = input.value.trim();
 
-    playMeow();
+  if(!name){
 
-    const messages = [
-        "miau ♡",
-        "otra vez...",
-        "me gusta eso ♡",
-        "mrrr...",
-        "¿me acariciaste?",
-        "♡"
-    ];
+    document.getElementById("savedName").textContent =
+      "Primero escribe un nombre.";
 
-    showBubble(
-        messages[
-            Math.floor(
-                Math.random()*messages.length
-            )
-        ]
-    );
+    return;
+  }
 
-});
+  localStorage.setItem("alisCatName",name);
 
-/* =====================================================
-   BURBUJA
-===================================================== */
+  document.getElementById("savedName").textContent =
+    `Ahora se llama ${name} 🖤`;
 
-function showBubble(text){
-
-    catBubble.textContent = text;
-
-    catBubble.classList.add("show");
-
-    clearTimeout(bubbleTimer);
-
-    bubbleTimer = setTimeout(()=>{
-
-        catBubble.classList.remove("show");
-
-    },2200);
+  showMessage(
+    window.innerWidth / 2,
+    window.innerHeight * .65,
+    `${name} 🐈`
+  );
 
 }
 
-/* =====================================================
-   MAULLIDOS AUTOMÁTICOS
-===================================================== */
 
-function autonomousMeow(){
+function loadCatName(){
 
-    if(!unlocked){
-        return;
-    }
+  const saved = localStorage.getItem("alisCatName");
 
-    if(!dragging){
+  if(saved){
 
-        if(Math.random() < .65){
+    document.getElementById("catNameInput").value = saved;
 
-            playMeow();
+    document.getElementById("savedName").textContent =
+      `Ahora se llama ${saved} 🖤`;
 
-            showBubble(
-                catMessages[
-                    Math.floor(
-                        Math.random()*catMessages.length
-                    )
-                ]
-            );
-
-        }
-
-    }
-
-    setTimeout(
-        autonomousMeow,
-        9000 + Math.random()*9000
-    );
+  }
 
 }
 
-/* =====================================================
-   CORAZONES
-===================================================== */
 
-function createHeart(x,y){
+/* =========================
+   MIMOS
+========================= */
 
-    const heart =
-        document.createElement("div");
+function giveMimos(){
 
-    heart.className =
-        "floating-heart";
+  playMeow();
+
+  const x = catX;
+  const y = catY;
+
+  showMessage(
+    x,
+    y - 55,
+    "Mimitos para mi mascotita 🖤"
+  );
+
+  createHearts(x,y,9);
+
+  createSparks(x,y,7);
+
+}
+
+
+/* =========================
+   LLUVIA
+========================= */
+
+function emojiRain(){
+
+  const emojis = [
+    "🖤",
+    "♡",
+    "✦",
+    "🐾",
+    "✨",
+    "💫"
+  ];
+
+  for(let i=0;i<28;i++){
+
+    const item = document.createElement("div");
+
+    item.className = "rainItem";
+
+    item.textContent =
+      emojis[Math.floor(Math.random()*emojis.length)];
+
+    item.style.left =
+      Math.random()*100 + "vw";
+
+    item.style.fontSize =
+      (12 + Math.random()*18) + "px";
+
+    item.style.animationDuration =
+      (2.5 + Math.random()*3) + "s";
+
+    item.style.animationDelay =
+      Math.random() + "s";
+
+    document.body.appendChild(item);
+
+    setTimeout(()=>{
+      item.remove();
+    },6000);
+
+  }
+
+}
+
+
+/* =========================
+   EFECTOS
+========================= */
+
+function showMessage(x,y,text){
+
+  const el = document.createElement("div");
+
+  el.className = "floatMessage";
+
+  el.textContent = text;
+
+  el.style.left = `${x}px`;
+  el.style.top = `${y}px`;
+
+  document.body.appendChild(el);
+
+  setTimeout(()=>{
+    el.remove();
+  },2300);
+
+}
+
+
+function createHearts(x,y,count=5){
+
+  for(let i=0;i<count;i++){
+
+    const heart = document.createElement("div");
+
+    heart.className = "heart";
 
     heart.textContent =
-        Math.random() > .3
-        ? "♥"
-        : "♡";
+      Math.random() > .4 ? "🖤" : "♡";
 
-    heart.style.left = x + "px";
-    heart.style.top = y + "px";
+    heart.style.left =
+      (x + (Math.random()*70-35)) + "px";
+
+    heart.style.top =
+      (y + (Math.random()*30-15)) + "px";
+
+    heart.style.fontSize =
+      (13 + Math.random()*13) + "px";
+
+    heart.style.setProperty(
+      "--drift",
+      (Math.random()*80-40) + "px"
+    );
 
     document.body.appendChild(heart);
 
     setTimeout(()=>{
-        heart.remove();
-    },2400);
+      heart.remove();
+    },2600);
+
+  }
 
 }
 
-/* =====================================================
-   CORAZONES AMBIENTALES
-===================================================== */
 
-setInterval(()=>{
+function createSparks(x,y,count=5){
 
-    if(!unlocked){
-        return;
+  for(let i=0;i<count;i++){
+
+    const spark = document.createElement("div");
+
+    spark.className = "spark";
+
+    spark.textContent = "✦";
+
+    spark.style.left =
+      (x + Math.random()*70-35) + "px";
+
+    spark.style.top =
+      (y + Math.random()*50-25) + "px";
+
+    spark.style.animationDelay =
+      (Math.random()*.4) + "s";
+
+    document.body.appendChild(spark);
+
+    setTimeout(()=>{
+      spark.remove();
+    },1700);
+
+  }
+
+}
+
+
+/* =========================
+   MAULLIDO
+========================= */
+
+function playMeow(){
+
+  try{
+
+    meow.currentTime = 0;
+    meow.volume = .7;
+    meow.play().catch(()=>{});
+
+  }catch(e){}
+
+}
+
+
+/* =========================
+   GATO
+========================= */
+
+function startCat(){
+
+  catMoving = true;
+
+  requestAnimationFrame(catLoop);
+
+  setInterval(()=>{
+
+    if(!dragging && Math.random() < .65){
+
+      playMeow();
+
+      showMessage(
+        catX,
+        catY - 45,
+        "miau"
+      );
+
     }
 
-    if(Math.random() < .35){
+  },9000);
 
-        const x =
-            Math.random()*window.innerWidth;
+  setInterval(()=>{
 
-        const y =
-            window.innerHeight - 20;
+    if(!dragging){
 
-        createHeart(x,y);
+      cat.classList.add("blink");
+
+      setTimeout(()=>{
+        cat.classList.remove("blink");
+      },170);
 
     }
 
-},3500);
+  },3500);
 
-/* =====================================================
-   EVITAR SELECCIÓN ACCIDENTAL
-===================================================== */
+}
 
-document.addEventListener("dragstart",(event)=>{
-    if(event.target === cat){
-        event.preventDefault();
+
+function catLoop(){
+
+  if(catMoving && !dragging){
+
+    /*
+      El gato se mueve por toda la pantalla.
+      Dejamos espacio para que no salga completamente
+      de los bordes.
+    */
+
+    catX += catDirection * .55;
+
+    const minX = 65;
+    const maxX = window.innerWidth - 65;
+
+    if(catX >= maxX){
+
+      catX = maxX;
+      catDirection = -1;
+
     }
+
+    if(catX <= minX){
+
+      catX = minX;
+      catDirection = 1;
+
+    }
+
+    /*
+      Dirección de movimiento separada de la apariencia.
+      Así no camina de espaldas.
+    */
+
+    cat.style.setProperty(
+      "--faceDirection",
+      catDirection === 1 ? 1 : -1
+    );
+
+    /*
+      Movimiento vertical suave para que parezca
+      que recorre diferentes zonas.
+    */
+
+    const baseY =
+      window.innerHeight * .63;
+
+    catY =
+      baseY +
+      Math.sin(Date.now() / 1900) * 80;
+
+    catY =
+      Math.max(
+        180,
+        Math.min(
+          window.innerHeight - 130,
+          catY
+        )
+      );
+
+    cat.style.left = `${catX}px`;
+    cat.style.top = `${catY}px`;
+
+    cat.classList.add("walking");
+
+  }
+
+  requestAnimationFrame(catLoop);
+
+}
+
+
+/* =========================
+   TOCAR / ARRASTRAR GATO
+========================= */
+
+cat.addEventListener("pointerdown",(event)=>{
+
+  dragging = true;
+
+  cat.classList.add("dragging");
+  cat.classList.remove("walking");
+
+  dragOffsetX =
+    event.clientX - catX;
+
+  dragOffsetY =
+    event.clientY - catY;
+
+  cat.setPointerCapture(event.pointerId);
+
+  playMeow();
+
+  createHearts(
+    event.clientX,
+    event.clientY,
+    5
+  );
+
 });
 
-/* =====================================================
-   TECLADO — POR SI SE ABRE EN PC
-===================================================== */
+
+cat.addEventListener("pointermove",(event)=>{
+
+  if(!dragging) return;
+
+  catX =
+    event.clientX - dragOffsetX;
+
+  catY =
+    event.clientY - dragOffsetY;
+
+  catX =
+    Math.max(
+      55,
+      Math.min(
+        window.innerWidth - 55,
+        catX
+      )
+    );
+
+  catY =
+    Math.max(
+      130,
+      Math.min(
+        window.innerHeight - 100,
+        catY
+      )
+    );
+
+  cat.style.left = `${catX}px`;
+  cat.style.top = `${catY}px`;
+
+});
+
+
+function releaseCat(){
+
+  if(!dragging) return;
+
+  dragging = false;
+
+  cat.classList.remove("dragging");
+
+  catMoving = true;
+
+}
+
+
+cat.addEventListener("pointerup",releaseCat);
+cat.addEventListener("pointercancel",releaseCat);
+
+
+/* =========================
+   CONSTRUCCIÓN
+========================= */
+
+/*
+  IMPORTANTE:
+  Cada matriz se lee de izquierda a derecha.
+
+  1 = bloque
+  0 = vacío
+
+  La A está escrita correctamente:
+  
+  01110
+  10001
+  10001
+  11111
+  10001
+  10001
+  10001
+*/
+
+const buildLetters = {
+
+  A:[
+    "01110",
+    "10001",
+    "10001",
+    "11111",
+    "10001",
+    "10001",
+    "10001"
+  ],
+
+  X:[
+    "10001",
+    "01010",
+    "00100",
+    "01010",
+    "10001",
+    "00000",
+    "00000"
+  ],
+
+  K:[
+    "10001",
+    "10010",
+    "10100",
+    "11000",
+    "10100",
+    "10010",
+    "10001"
+  ]
+
+};
+
+
+function startBuilding(){
+
+  if(buildStarted) return;
+
+  buildStarted = true;
+
+  const overlay =
+    document.getElementById("buildOverlay");
+
+  overlay.classList.add("open");
+
+  document.getElementById("buildSubtitle").textContent =
+    "El gato ha decidido ponerse a trabajar.";
+
+  const builder =
+    document.getElementById("builderCat");
+
+  builder.style.left = "8%";
+
+  buildStructure();
+
+}
+
+
+function buildStructure(){
+
+  const building =
+    document.getElementById("building");
+
+  building.innerHTML = "";
+
+  const letters =
+    ["A","X","K"];
+
+  let globalIndex = 0;
+
+  letters.forEach(letter=>{
+
+    const holder =
+      document.createElement("div");
+
+    holder.className = "letterBuild";
+
+    const matrix =
+      buildLetters[letter];
+
+    /*
+      7 filas x 5 columnas.
+      Se dibuja desde abajo hacia arriba.
+      Por eso la letra NO se invierte.
+    */
+
+    for(let row=0;row<matrix.length;row++){
+
+      for(let col=0;col<matrix[row].length;col++){
+
+        if(matrix[row][col] !== "1"){
+          continue;
+        }
+
+        const block =
+          document.createElement("div");
+
+        block.className = "block";
+
+        block.style.left =
+          `${col * 17 + 18}px`;
+
+        /*
+          La fila 0 es la parte superior.
+          La colocamos desde arriba para conservar
+          la orientación correcta de la letra.
+        */
+
+        block.style.top =
+          `${row * 17 + 60}px`;
+
+        holder.appendChild(block);
+
+        const delay =
+          globalIndex * 55;
+
+        setTimeout(()=>{
+
+          block.classList.add("show");
+
+          if(globalIndex % 4 === 0){
+
+            playBell();
+
+          }
+
+        },delay);
+
+        globalIndex++;
+
+      }
+
+    }
+
+    building.appendChild(holder);
+
+  });
+
+  /*
+    El gato camina hacia la construcción.
+  */
+
+  setTimeout(()=>{
+
+    const builder =
+      document.getElementById("builderCat");
+
+    builder.style.left =
+      "calc(50% - 250px)";
+
+    builder.style.setProperty(
+      "--faceDirection",
+      1
+    );
+
+    builder.classList.add("walking");
+
+  },500);
+
+
+  const totalBlocks =
+    21 + 21 + 21;
+
+  const finishDelay =
+    totalBlocks * 55 + 900;
+
+  setTimeout(()=>{
+
+    document.getElementById("buildSubtitle").textContent =
+      "Trabajo terminado. Era para ti. 🖤";
+
+    document
+      .getElementById("buildFinish")
+      .classList.add("show");
+
+    createHearts(
+      window.innerWidth / 2,
+      window.innerHeight * .48,
+      15
+    );
+
+    createSparks(
+      window.innerWidth / 2,
+      window.innerHeight * .48,
+      15
+    );
+
+  },finishDelay);
+
+}
+
+
+function closeBuilding(){
+
+  document
+    .getElementById("buildOverlay")
+    .classList.remove("open");
+
+  buildStarted = false;
+
+  document
+    .getElementById("building")
+    .innerHTML = "";
+
+  document
+    .getElementById("buildFinish")
+    .classList.remove("show");
+
+  document.getElementById("buildSubtitle").textContent =
+    "El gato ha decidido ponerse a trabajar.";
+
+}
+
+
+/* =========================
+   NOMBRE AL CARGAR
+========================= */
+
+loadCatName();
+
+
+/* =========================
+   TECLADO
+========================= */
 
 document.addEventListener("keydown",(event)=>{
 
-    if(unlocked){
-        return;
-    }
+  if(
+    document
+      .getElementById("lockScreen")
+      .classList.contains("hidden")
+  ){
 
-    if(/^[0-9]$/.test(event.key)){
+    return;
 
-        const button =
-            document.querySelector(
-                `[data-number="${event.key}"]`
-            );
+  }
 
-        if(button){
-            button.click();
-        }
+  if(/^[0-9]$/.test(event.key)){
 
-    }
+    pressKey(event.key);
+
+  }
+
+  if(event.key === "Backspace"){
+
+    clearPin();
+
+  }
 
 });
 
-/* =====================================================
-   ESTADO INICIAL
-===================================================== */
 
-updatePinDots();
+/* =========================
+   CAMBIO DE TAMAÑO
+========================= */
+
+window.addEventListener("resize",()=>{
+
+  catX =
+    Math.max(
+      55,
+      Math.min(
+        window.innerWidth - 55,
+        catX
+      )
+    );
+
+  catY =
+    Math.max(
+      130,
+      Math.min(
+        window.innerHeight - 100,
+        catY
+      )
+    );
+
+});
+
+
+/* =========================
+   INTRO
+========================= */
+
+const intro =
+  document.createElement("div");
+
+intro.className = "introFlash";
+
+intro.innerHTML = `
+  <div class="introText">
+    <div>UN PEQUEÑO RINCÓN</div>
+    <strong>Para Alis 🖤</strong>
+  </div>
+`;
+
+document.body.appendChild(intro);
 
 </script>
 
