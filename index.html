@@ -3,17 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
 <title>Para Alis 🖤</title>
 
 <style>
-
 :root{
-    --black:#050505;
     --wine:#64152c;
     --wine2:#9b3152;
     --gold:#d7b56d;
     --cream:#f5e8d0;
+    --black:#050505;
 }
 
 *{
@@ -21,18 +19,12 @@
     -webkit-tap-highlight-color:transparent;
 }
 
-html,
-body{
+html,body{
     margin:0;
     width:100%;
     min-height:100%;
     background:
-        radial-gradient(
-            circle at 50% 20%,
-            #32101c 0%,
-            #10070b 40%,
-            #030303 85%
-        );
+        radial-gradient(circle at 50% 20%, #32101c 0%, #10070b 38%, #030303 80%);
     color:var(--cream);
     font-family:Georgia,"Times New Roman",serif;
     overflow-x:hidden;
@@ -50,293 +42,162 @@ body{
     position:fixed;
     inset:0;
     pointer-events:none;
-
     background:
-        radial-gradient(
-            circle at 20% 30%,
-            rgba(155,49,82,.12),
-            transparent 30%
-        ),
-        radial-gradient(
-            circle at 80% 70%,
-            rgba(215,181,109,.08),
-            transparent 28%
-        );
-
+        radial-gradient(circle at 20% 30%, rgba(155,49,82,.12), transparent 28%),
+        radial-gradient(circle at 80% 70%, rgba(215,181,109,.07), transparent 25%);
     z-index:0;
 }
 
 .particle{
     position:fixed;
-
     width:3px;
     height:3px;
-
     border-radius:50%;
-
     background:rgba(215,181,109,.45);
-
     pointer-events:none;
-
     animation:floatParticle linear infinite;
-
     z-index:1;
 }
 
 @keyframes floatParticle{
-
     from{
         transform:translateY(110vh);
         opacity:0;
     }
-
-    15%{
-        opacity:.7;
-    }
-
-    80%{
-        opacity:.5;
-    }
-
+    15%{opacity:.7}
+    80%{opacity:.5}
     to{
         transform:translateY(-10vh);
         opacity:0;
     }
-
 }
 
 /* =========================
-   PIN
+   PANTALLA PIN
 ========================= */
 
 #lockScreen{
-
     position:fixed;
     inset:0;
-
     z-index:1000;
-
     display:flex;
     justify-content:center;
     align-items:center;
-
     padding:20px;
-
     background:
-        radial-gradient(
-            circle at center,
-            #32101c 0%,
-            #0b0508 45%,
-            #020202 100%
-        );
-
-    transition:
-        opacity .8s ease,
-        visibility .8s ease;
+        radial-gradient(circle at center,#32101c 0%,#0b0508 45%,#020202 100%);
+    transition:opacity .8s ease, visibility .8s ease;
 }
 
 #lockScreen.hidden{
-
     opacity:0;
-
     visibility:hidden;
-
     pointer-events:none;
 }
 
 .lock-box{
-
     width:min(390px,92vw);
-
     padding:32px 24px;
-
     text-align:center;
-
-    border:
-        1px solid
-        rgba(215,181,109,.3);
-
+    border:1px solid rgba(215,181,109,.3);
     border-radius:25px;
-
-    background:
-        rgba(10,5,7,.88);
-
+    background:rgba(10,5,7,.84);
     box-shadow:
-        0 0 60px
-        rgba(100,21,44,.35),
-
-        inset 0 0 30px
-        rgba(255,255,255,.02);
-
+        0 0 60px rgba(100,21,44,.35),
+        inset 0 0 30px rgba(255,255,255,.02);
     backdrop-filter:blur(12px);
 }
 
 .lock-cat{
-
     font-size:58px;
-
     margin-bottom:8px;
-
-    animation:
-        catFloat
-        3s
-        ease-in-out
-        infinite;
+    animation:catFloat 3s ease-in-out infinite;
 }
 
 @keyframes catFloat{
-
-    0%,100%{
-        transform:translateY(0);
-    }
-
-    50%{
-        transform:translateY(-8px);
-    }
-
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-8px)}
 }
 
 .lock-box h1{
-
     margin:4px 0 7px;
-
     font-size:29px;
-
     color:var(--gold);
-
     font-weight:normal;
 }
 
 .lock-box p{
-
     margin:0 0 22px;
-
     opacity:.7;
-
     font-family:Arial,sans-serif;
-
     font-size:13px;
 }
 
 .pin-display{
-
     height:38px;
-
     display:flex;
-
     justify-content:center;
-
     align-items:center;
-
     gap:10px;
-
     margin-bottom:18px;
 }
 
 .pin-dot{
-
     width:9px;
     height:9px;
-
     border-radius:50%;
-
-    border:
-        1px solid
-        var(--gold);
-
+    border:1px solid var(--gold);
     transition:.2s;
 }
 
 .pin-dot.active{
-
     background:var(--gold);
-
-    box-shadow:
-        0 0 10px
-        rgba(215,181,109,.7);
+    box-shadow:0 0 10px rgba(215,181,109,.7);
 }
 
 .pin-keypad{
-
     display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
+    grid-template-columns:repeat(3,1fr);
     gap:10px;
 }
 
 .pin-key{
-
-    border:
-        1px solid
-        rgba(215,181,109,.2);
-
-    background:
-        rgba(255,255,255,.035);
-
+    border:1px solid rgba(215,181,109,.2);
+    background:rgba(255,255,255,.035);
     color:var(--cream);
-
     border-radius:14px;
-
     min-height:54px;
-
     font-size:19px;
-
     cursor:pointer;
-
     transition:.15s;
 }
 
 .pin-key:active{
-
     transform:scale(.92);
-
-    background:
-        rgba(155,49,82,.4);
-
+    background:rgba(155,49,82,.4);
     border-color:var(--gold);
 }
 
 .pin-key.zero{
-
     grid-column:2;
 }
 
 .pin-error{
-
     height:20px;
-
     margin-top:12px;
-
     color:#d56c87;
-
     font-family:Arial,sans-serif;
-
     font-size:12px;
 }
 
 .shake{
-
-    animation:
-        shake
-        .35s;
+    animation:shake .35s;
 }
 
 @keyframes shake{
-
-    0%,100%{
-        transform:translateX(0);
-    }
-
-    25%{
-        transform:translateX(-8px);
-    }
-
-    75%{
-        transform:translateX(8px);
-    }
-
+    0%,100%{transform:translateX(0)}
+    25%{transform:translateX(-8px)}
+    75%{transform:translateX(8px)}
 }
 
 /* =========================
@@ -344,249 +205,124 @@ body{
 ========================= */
 
 #mainContent{
-
     position:relative;
-
     z-index:2;
-
     width:100%;
-
     min-height:100vh;
-
-    padding:
-        65px
-        20px
-        100px;
-
+    padding:65px 20px 100px;
     opacity:0;
-
-    transform:
-        translateY(20px);
-
-    transition:
-        opacity 1.2s ease,
-        transform 1.2s ease;
+    transform:translateY(20px);
+    transition:opacity 1.2s ease, transform 1.2s ease;
 }
 
 #mainContent.visible{
-
     opacity:1;
-
-    transform:
-        translateY(0);
+    transform:translateY(0);
 }
 
 .hero{
-
     max-width:850px;
-
     margin:0 auto;
-
     text-align:center;
-
-    padding:
-        30px
-        10px
-        40px;
+    padding:30px 10px 40px;
 }
 
 .hero .small{
-
     font-family:Arial,sans-serif;
-
     text-transform:uppercase;
-
     letter-spacing:4px;
-
     font-size:10px;
-
     color:var(--gold);
-
     opacity:.75;
 }
 
 .hero h1{
-
-    margin:
-        14px
-        0
-        8px;
-
-    font-size:
-        clamp(
-            38px,
-            10vw,
-            70px
-        );
-
+    margin:14px 0 8px;
+    font-size:clamp(38px,10vw,70px);
     font-weight:normal;
-
     color:#f4dfb0;
-
-    text-shadow:
-        0 0 30px
-        rgba(155,49,82,.35);
+    text-shadow:0 0 30px rgba(155,49,82,.35);
 }
 
 .hero p{
-
     margin:0;
-
     opacity:.65;
-
     font-style:italic;
 }
 
 .heart-line{
-
-    margin:
-        25px
-        auto;
-
+    margin:25px auto;
     width:80px;
-
     height:1px;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            var(--gold),
-            transparent
-        );
+    background:linear-gradient(90deg,transparent,var(--gold),transparent);
 }
 
 .letter{
-
     position:relative;
-
     max-width:720px;
-
     margin:0 auto;
-
-    padding:
-        35px
-        clamp(22px,6vw,55px);
-
-    border:
-        1px solid
-        rgba(215,181,109,.22);
-
+    padding:35px clamp(22px,6vw,55px);
+    border:1px solid rgba(215,181,109,.22);
     border-radius:25px;
-
     background:
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,.035),
-            rgba(100,21,44,.08)
-        );
-
+        linear-gradient(135deg,rgba(255,255,255,.035),rgba(100,21,44,.08));
     box-shadow:
-        0 30px 80px
-        rgba(0,0,0,.4),
-
-        inset 0 0 40px
-        rgba(255,255,255,.015);
+        0 30px 80px rgba(0,0,0,.4),
+        inset 0 0 40px rgba(255,255,255,.015);
 }
 
 .letter:before{
-
     content:"";
-
     position:absolute;
-
     inset:8px;
-
-    border:
-        1px solid
-        rgba(215,181,109,.06);
-
+    border:1px solid rgba(215,181,109,.06);
     border-radius:19px;
-
     pointer-events:none;
 }
 
 .letter h2{
-
     position:relative;
-
     color:var(--gold);
-
     font-weight:normal;
-
-    margin:
-        0
-        0
-        25px;
-
+    margin:0 0 25px;
     font-size:27px;
 }
 
 .letter p{
-
     position:relative;
-
     font-size:17px;
-
     line-height:1.9;
-
-    margin:
-        0
-        0
-        18px;
-
+    margin:0 0 18px;
     color:#eadcc7;
 }
 
 .signature{
-
     margin-top:30px;
-
     text-align:right;
-
     color:var(--gold);
-
     font-style:italic;
-
     font-size:19px;
 }
 
 /* =========================
-   MÚSICA
+   BOTÓN MÚSICA
 ========================= */
 
 #musicButton{
-
     position:fixed;
-
     top:16px;
     right:16px;
-
     z-index:500;
-
-    border:
-        1px solid
-        rgba(215,181,109,.35);
-
-    background:
-        rgba(10,5,7,.8);
-
+    border:1px solid rgba(215,181,109,.35);
+    background:rgba(10,5,7,.8);
     color:var(--gold);
-
     width:46px;
     height:46px;
-
     border-radius:50%;
-
     font-size:18px;
-
     cursor:pointer;
-
     backdrop-filter:blur(8px);
-
-    box-shadow:
-        0 5px 25px
-        rgba(0,0,0,.35);
+    box-shadow:0 5px 25px rgba(0,0,0,.35);
 }
 
 /* =========================
@@ -594,48 +330,24 @@ body{
 ========================= */
 
 .floating-heart{
-
     position:fixed;
-
     pointer-events:none;
-
-    z-index:400;
-
+    z-index:20;
     color:#b54b6a;
-
     font-size:18px;
-
-    animation:
-        heartFloat
-        2.4s
-        ease-out
-        forwards;
+    animation:heartFloat 2.4s ease-out forwards;
 }
 
 @keyframes heartFloat{
-
     0%{
-
         opacity:0;
-
-        transform:
-            translate(-50%,0)
-            scale(.5);
+        transform:translate(-50%,0) scale(.5);
     }
-
-    15%{
-        opacity:1;
-    }
-
+    15%{opacity:1}
     100%{
-
         opacity:0;
-
-        transform:
-            translate(-50%,-100px)
-            scale(1.2);
+        transform:translate(-50%,-100px) scale(1.2);
     }
-
 }
 
 /* =========================
@@ -643,374 +355,173 @@ body{
 ========================= */
 
 .walking-cat{
-
     position:fixed;
-
     left:0;
     top:0;
-
     width:145px;
     height:145px;
-
     z-index:300;
-
     pointer-events:auto;
-
     touch-action:none;
-
     user-select:none;
-
     cursor:grab;
-
     will-change:transform;
-
     filter:
-        drop-shadow(
-            0 12px 12px
-            rgba(0,0,0,.55)
-        )
-
-        drop-shadow(
-            0 0 8px
-            rgba(155,49,82,.18)
-        );
+        drop-shadow(0 12px 12px rgba(0,0,0,.55))
+        drop-shadow(0 0 8px rgba(155,49,82,.18));
 }
 
 .walking-cat.dragging{
-
     cursor:grabbing;
 }
 
 .cat-svg{
-
     width:100%;
     height:100%;
-
     overflow:visible;
 }
 
-/* CUERPO */
-
+/* cuerpo */
 .cat-body{
-
-    transform-origin:
-        76px 93px;
-
-    animation:
-        bodyWalk
-        .42s
-        ease-in-out
-        infinite
-        alternate;
+    transform-origin:76px 93px;
+    animation:bodyWalk .42s ease-in-out infinite alternate;
 }
 
 @keyframes bodyWalk{
-
-    from{
-        transform:
-            translateY(0)
-            rotate(-1deg);
-    }
-
-    to{
-        transform:
-            translateY(-2px)
-            rotate(1deg);
-    }
-
+    from{transform:translateY(0) rotate(-1deg)}
+    to{transform:translateY(-2px) rotate(1deg)}
 }
 
-/* PATAS */
-
+/* patas */
 .leg-front,
 .leg-back{
-
     transform-box:fill-box;
-
-    transform-origin:
-        top center;
+    transform-origin:top center;
 }
 
 .leg-front{
-
-    animation:
-        frontLeg
-        .42s
-        ease-in-out
-        infinite
-        alternate;
+    animation:frontLeg .42s ease-in-out infinite alternate;
 }
 
 .leg-back{
-
-    animation:
-        backLeg
-        .42s
-        ease-in-out
-        infinite
-        alternate-reverse;
+    animation:backLeg .42s ease-in-out infinite alternate-reverse;
 }
 
 @keyframes frontLeg{
-
-    from{
-        transform:rotate(8deg);
-    }
-
-    to{
-        transform:rotate(-10deg);
-    }
-
+    from{transform:rotate(8deg)}
+    to{transform:rotate(-10deg)}
 }
 
 @keyframes backLeg{
-
-    from{
-        transform:rotate(-8deg);
-    }
-
-    to{
-        transform:rotate(10deg);
-    }
-
+    from{transform:rotate(-8deg)}
+    to{transform:rotate(10deg)}
 }
 
-/* COLA */
-
+/* cola */
 .cat-tail{
-
     transform-box:fill-box;
-
-    transform-origin:
-        left center;
-
-    animation:
-        tailMove
-        1.15s
-        ease-in-out
-        infinite;
+    transform-origin:left center;
+    animation:tailMove 1.15s ease-in-out infinite;
 }
 
 @keyframes tailMove{
-
-    0%,100%{
-        transform:rotate(-3deg);
-    }
-
-    50%{
-        transform:rotate(10deg);
-    }
-
+    0%,100%{transform:rotate(-3deg)}
+    50%{transform:rotate(10deg)}
 }
 
-/* OJOS */
-
+/* ojos */
 .cat-eye{
-
     transform-box:fill-box;
-
     transform-origin:center;
-
-    animation:
-        blink
-        5s
-        infinite;
+    animation:blink 5s infinite;
 }
 
 @keyframes blink{
-
-    0%,42%,46%,100%{
-        transform:scaleY(1);
-    }
-
-    44%{
-        transform:scaleY(.08);
-    }
-
+    0%,42%,46%,100%{transform:scaleY(1)}
+    44%{transform:scaleY(.08)}
 }
 
-/* OREJAS */
-
+/* orejas */
 .cat-ear{
-
-    transform-origin:
-        center bottom;
-
-    animation:
-        earMove
-        4s
-        ease-in-out
-        infinite;
+    transform-origin:center bottom;
+    animation:earMove 4s ease-in-out infinite;
 }
 
 @keyframes earMove{
-
-    0%,90%,100%{
-        transform:rotate(0);
-    }
-
-    94%{
-        transform:rotate(-5deg);
-    }
-
-    97%{
-        transform:rotate(5deg);
-    }
-
+    0%,90%,100%{transform:rotate(0)}
+    94%{transform:rotate(-5deg)}
+    97%{transform:rotate(5deg)}
 }
 
-/* SENTADO */
-
-.walking-cat.sitting
-.cat-body{
-
+/* estado sentado */
+.walking-cat.sitting .cat-body{
     animation:none;
-
-    transform:
-        translateY(7px);
+    transform:translateY(7px);
 }
 
-.walking-cat.sitting
-.leg-front,
-.walking-cat.sitting
-.leg-back{
-
+.walking-cat.sitting .leg-front,
+.walking-cat.sitting .leg-back{
     animation:none;
-
     transform:rotate(0);
 }
 
-.walking-cat.sitting
-.cat-tail{
-
-    animation:
-        tailSit
-        2s
-        ease-in-out
-        infinite;
+.walking-cat.sitting .cat-tail{
+    animation:tailSit 2s ease-in-out infinite;
 }
 
 @keyframes tailSit{
-
-    0%,100%{
-        transform:rotate(5deg);
-    }
-
-    50%{
-        transform:rotate(22deg);
-    }
-
+    0%,100%{transform:rotate(5deg)}
+    50%{transform:rotate(22deg)}
 }
 
-/* BURBUJA */
-
+/* burbuja */
 .cat-bubble{
-
     position:absolute;
-
     left:105px;
     top:-8px;
-
     min-width:90px;
-
     max-width:150px;
-
-    padding:
-        7px
-        11px;
-
-    border-radius:
-        14px
-        14px
-        14px
-        3px;
-
-    background:
-        rgba(10,5,7,.92);
-
-    border:
-        1px solid
-        rgba(215,181,109,.3);
-
+    padding:7px 11px;
+    border-radius:14px 14px 14px 3px;
+    background:rgba(10,5,7,.9);
+    border:1px solid rgba(215,181,109,.3);
     color:#f1dfbd;
-
     font-family:Arial,sans-serif;
-
     font-size:11px;
-
     text-align:center;
-
     opacity:0;
-
-    transform:
-        translateY(5px)
-        scale(.9);
-
+    transform:translateY(5px) scale(.9);
     transition:.25s;
-
     pointer-events:none;
-
-    box-shadow:
-        0 5px 20px
-        rgba(0,0,0,.4);
+    box-shadow:0 5px 20px rgba(0,0,0,.4);
 }
 
 .cat-bubble.show{
-
     opacity:1;
-
-    transform:
-        translateY(0)
-        scale(1);
+    transform:translateY(0) scale(1);
 }
 
-/* MAULLIDO VISUAL */
-
+/* maullido visual */
 .meow-pop{
-
     position:fixed;
-
     z-index:350;
-
     pointer-events:none;
-
     color:var(--gold);
-
     font-size:14px;
-
     font-style:italic;
-
-    animation:
-        meowPop
-        1.2s
-        ease-out
-        forwards;
+    animation:meowPop 1.2s ease-out forwards;
 }
 
 @keyframes meowPop{
-
     from{
-
         opacity:0;
-
-        transform:
-            translateY(10px)
-            scale(.7);
+        transform:translateY(10px) scale(.7);
     }
-
-    20%{
-        opacity:1;
-    }
-
+    20%{opacity:1}
     to{
-
         opacity:0;
-
-        transform:
-            translateY(-40px)
-            scale(1.1);
+        transform:translateY(-40px) scale(1.1);
     }
-
 }
 
 /* =========================
@@ -1018,66 +529,46 @@ body{
 ========================= */
 
 .footer{
-
     text-align:center;
-
-    margin:
-        55px
-        auto
-        0;
-
+    margin:55px auto 0;
     opacity:.4;
-
     font-family:Arial,sans-serif;
-
     font-size:11px;
-
     letter-spacing:1px;
 }
 
 /* =========================
-   CELULAR
+   RESPONSIVE
 ========================= */
 
 @media(max-width:600px){
-
     #mainContent{
         padding-top:55px;
     }
 
     .walking-cat{
-
         width:125px;
         height:125px;
     }
 
     .cat-bubble{
-
         left:90px;
         top:0;
     }
 
     .letter{
-
-        padding:
-            30px
-            21px;
+        padding:30px 21px;
     }
 
     .letter p{
-
         font-size:16px;
-
         line-height:1.8;
     }
 
     .hero h1{
-
         font-size:46px;
     }
-
 }
-
 </style>
 </head>
 
@@ -1085,138 +576,63 @@ body{
 
 <div class="bg-glow"></div>
 
+<!-- Partículas -->
 <div id="particles"></div>
 
 <!-- =========================
-     AUDIOS
+     AUDIO
 ========================= -->
 
-<audio
-    id="music"
-    src="Musica.mp3"
-    loop
-    preload="auto">
-</audio>
-
-<audio
-    id="bell"
-    src="Cascabel.mp3"
-    preload="auto">
-</audio>
-
-<audio
-    id="meow"
-    src="Maullido.mp3"
-    preload="auto">
-</audio>
-
+<audio id="music" src="Musica.mp3" loop preload="auto"></audio>
+<audio id="bell" src="Cascabel.mp3" preload="auto"></audio>
+<audio id="meow" src="Maullido.mp3" preload="auto"></audio>
 
 <!-- =========================
-     PANTALLA PIN
+     PIN
 ========================= -->
 
 <section id="lockScreen">
 
     <div class="lock-box" id="lockBox">
 
-        <div class="lock-cat">
-            🐈‍⬛
-        </div>
+        <div class="lock-cat">🐈‍⬛</div>
 
-        <h1>
-            Para Alis
-        </h1>
+        <h1>Para Alis</h1>
 
-        <p>
-            Hay algo aquí que solo tú puedes abrir.
-        </p>
+        <p>Hay algo aquí que solo tú puedes abrir.</p>
 
-        <div
-            class="pin-display"
-            id="pinDisplay">
-
+        <div class="pin-display" id="pinDisplay">
             <span class="pin-dot"></span>
             <span class="pin-dot"></span>
             <span class="pin-dot"></span>
             <span class="pin-dot"></span>
             <span class="pin-dot"></span>
             <span class="pin-dot"></span>
-
         </div>
 
         <div class="pin-keypad">
 
-            <button
-                class="pin-key"
-                data-number="1">
-                1
-            </button>
+            <button class="pin-key" data-number="1">1</button>
+            <button class="pin-key" data-number="2">2</button>
+            <button class="pin-key" data-number="3">3</button>
 
-            <button
-                class="pin-key"
-                data-number="2">
-                2
-            </button>
+            <button class="pin-key" data-number="4">4</button>
+            <button class="pin-key" data-number="5">5</button>
+            <button class="pin-key" data-number="6">6</button>
 
-            <button
-                class="pin-key"
-                data-number="3">
-                3
-            </button>
+            <button class="pin-key" data-number="7">7</button>
+            <button class="pin-key" data-number="8">8</button>
+            <button class="pin-key" data-number="9">9</button>
 
-            <button
-                class="pin-key"
-                data-number="4">
-                4
-            </button>
-
-            <button
-                class="pin-key"
-                data-number="5">
-                5
-            </button>
-
-            <button
-                class="pin-key"
-                data-number="6">
-                6
-            </button>
-
-            <button
-                class="pin-key"
-                data-number="7">
-                7
-            </button>
-
-            <button
-                class="pin-key"
-                data-number="8">
-                8
-            </button>
-
-            <button
-                class="pin-key"
-                data-number="9">
-                9
-            </button>
-
-            <button
-                class="pin-key zero"
-                data-number="0">
-                0
-            </button>
+            <button class="pin-key zero" data-number="0">0</button>
 
         </div>
 
-        <div
-            class="pin-error"
-            id="pinError">
-        </div>
+        <div class="pin-error" id="pinError"></div>
 
     </div>
 
 </section>
-
 
 <!-- =========================
      CONTENIDO
@@ -1224,38 +640,23 @@ body{
 
 <main id="mainContent">
 
-    <button
-        id="musicButton"
-        aria-label="Música">
-        ♫
-    </button>
-
+    <button id="musicButton" aria-label="Música">♫</button>
 
     <section class="hero">
 
-        <div class="small">
-            Una pequeña sorpresa
-        </div>
+        <div class="small">Una pequeña sorpresa</div>
 
-        <h1>
-            Para Alis 🖤
-        </h1>
+        <h1>Para Alis 🖤</h1>
 
-        <p>
-            Porque entre tantas personas,
-            qué bonito que seas tú.
-        </p>
+        <p>Porque entre tantas personas, qué bonito que seas tú.</p>
 
         <div class="heart-line"></div>
 
     </section>
 
-
     <section class="letter">
 
-        <h2>
-            Alis 🖤
-        </h2>
+        <h2>Alis 🖤</h2>
 
         <p>
             Hay personas que llegan y simplemente pasan por tu vida… y luego estás tú.
@@ -1291,67 +692,46 @@ body{
 
     </section>
 
-
     <div class="footer">
         Hecho especialmente para Alis
     </div>
 
 </main>
 
-
 <!-- =========================
-     GATO
+     GATO ANIMADO
 ========================= -->
 
-<div
-    class="walking-cat"
-    id="walkingCat">
+<div class="walking-cat" id="walkingCat">
 
-    <div
-        class="cat-bubble"
-        id="catBubble">
-        miau ♡
-    </div>
+    <div class="cat-bubble" id="catBubble">miau ♡</div>
 
+    <svg class="cat-svg"
+         viewBox="0 0 150 150"
+         xmlns="http://www.w3.org/2000/svg">
 
-    <svg
-        class="cat-svg"
-        viewBox="0 0 150 150"
-        xmlns="http://www.w3.org/2000/svg">
-
-
-        <!-- COLA -->
-
+        <!-- Cola -->
         <g class="cat-tail">
-
             <path
-                d="
-                    M105 91
-                    C125 91 132 76 125 64
-                    C120 55 111 57 114 65
-                    C117 73 121 78 114 82
-                "
+                d="M105 91
+                   C125 91 132 76 125 64
+                   C120 55 111 57 114 65
+                   C117 73 121 78 114 82"
                 fill="none"
                 stroke="#090909"
                 stroke-width="10"
                 stroke-linecap="round"
                 stroke-linejoin="round"/>
-
             <path
-                d="
-                    M106 90
-                    C125 90 131 76 125 65
-                "
+                d="M106 90
+                   C125 90 131 76 125 65"
                 fill="none"
                 stroke="#5f2036"
                 stroke-width="2"
                 opacity=".7"/>
-
         </g>
 
-
-        <!-- CUERPO -->
-
+        <!-- Cuerpo -->
         <g class="cat-body">
 
             <ellipse
@@ -1363,83 +743,66 @@ body{
                 stroke="#171717"
                 stroke-width="2"/>
 
-
-            <!-- BRILLO -->
-
+            <!-- brillo del lomo -->
             <path
-                d="
-                    M50 79
-                    C65 66 91 66 105 80
-                "
+                d="M50 79 C65 66 91 66 105 80"
                 fill="none"
                 stroke="#38111e"
                 stroke-width="3"
                 opacity=".65"/>
 
-
-            <!-- PATA TRASERA -->
-
+            <!-- pata trasera -->
             <g class="leg-back">
-
                 <path
-                    d="
-                        M62 103
-                        L59 128
-                        Q59 134 65 134
-                        L72 134
-                        Q75 132 72 129
-                        L69 126
-                        L73 103
-                    "
+                    d="M62 103 L59 128
+                       Q59 134 65 134
+                       L72 134
+                       Q75 132 72 129
+                       L69 126
+                       L73 103"
                     fill="#080808"
                     stroke="#171717"
                     stroke-width="2"/>
-
             </g>
 
-
-            <!-- PATA TRASERA 2 -->
-
+            <!-- pata trasera 2 -->
             <g class="leg-back">
-
                 <path
-                    d="
-                        M78 105
-                        L77 130
-                        Q77 135 83 135
-                        L90 135
-                        Q93 132 89 129
-                        L86 126
-                        L90 104
-                    "
+                    d="M78 105 L77 130
+                       Q77 135 83 135
+                       L90 135
+                       Q93 132 89 129
+                       L86 126
+                       L90 104"
                     fill="#080808"
                     stroke="#171717"
                     stroke-width="2"/>
-
             </g>
 
-
-            <!-- PATA DELANTERA -->
-
+            <!-- pata delantera -->
             <g class="leg-front">
-
                 <path
-                    d="
-                        M91 99
-                        L94 127
-                        Q95 133 101 133
-                        L107 133
-                        Q110 130 106 128
-                        L102 125
-                        L104 99
-                    "
+                    d="M91 99 L94 127
+                       Q95 133 101 133
+                       L107 133
+                       Q110 130 106 128
+                       L102 125
+                       L104 99"
                     fill="#080808"
                     stroke="#171717"
-                                        stroke-width="2"/>
+                    stroke-width="2"/>
             </g>
 
-            <!-- CABEZA -->
+            <!-- pecho -->
+            <path
+                d="M91 77
+                   Q83 91 91 105"
+                fill="none"
+                stroke="#391320"
+                stroke-width="3"
+                opacity=".55"/>
 
+            <!-- cabeza -->
             <ellipse
                 cx="50"
                 cy="65"
@@ -1449,299 +812,159 @@ body{
                 stroke="#171717"
                 stroke-width="2"/>
 
-            <!-- OREJA IZQUIERDA -->
+            <!-- oreja izquierda -->
             <path
-                d="M25 50 L23 17 Q23 12 28 16 L43 35 Z"
+                class="cat-ear"
+                d="M27 48 L28 19
+                   Q29 14 34 19
+                   L48 40 Z"
                 fill="#080808"
                 stroke="#171717"
                 stroke-width="2"/>
 
-            <!-- OREJA DERECHA -->
             <path
-                d="M57 35 L72 16 Q77 12 77 18 L75 51 Z"
+                d="M31 39 L31 25 L41 40 Z"
+                fill="#58172d"
+                opacity=".8"/>
+
+            <!-- oreja derecha -->
+            <path
+                class="cat-ear"
+                d="M52 40 L67 18
+                   Q70 14 71 21
+                   L72 49 Z"
                 fill="#080808"
                 stroke="#171717"
                 stroke-width="2"/>
 
-            <!-- INTERIOR DE OREJAS -->
             <path
-                d="M27 30 L27 21 L38 35 Z"
-                fill="#3b1725"/>
+                d="M61 39 L68 25 L69 43 Z"
+                fill="#58172d"
+                opacity=".8"/>
 
+            <!-- cara -->
+            <ellipse
+                cx="41"
+                cy="65"
+                rx="4"
+                ry="5"
+                fill="#d7b56d"
+                class="cat-eye"/>
+
+            <ellipse
+                cx="61"
+                cy="65"
+                rx="4"
+                ry="5"
+                fill="#d7b56d"
+                class="cat-eye"/>
+
+            <!-- pupilas -->
+            <ellipse
+                cx="41"
+                cy="66"
+                rx="1.5"
+                ry="4"
+                fill="#050505"
+                class="cat-eye"/>
+
+            <ellipse
+                cx="61"
+                cy="66"
+                rx="1.5"
+                ry="4"
+                fill="#050505"
+                class="cat-eye"/>
+
+            <!-- nariz -->
             <path
-                d="M62 35 L73 21 L73 30 Z"
-                fill="#3b1725"/>
+                d="M49 72 Q52 70 55 72 Q52 76 49 72"
+                fill="#a34865"/>
 
-            <!-- OJOS -->
-            <ellipse cx="39" cy="61" rx="5" ry="6" fill="#d8a85a"/>
-            <ellipse cx="61" cy="61" rx="5" ry="6" fill="#d8a85a"/>
-
-            <ellipse cx="39" cy="62" rx="1.7" ry="4.5" fill="#050505"/>
-            <ellipse cx="61" cy="62" rx="1.7" ry="4.5" fill="#050505"/>
-
-            <!-- BRILLO DE OJOS -->
-            <circle cx="37.5" cy="59.5" r="1.2" fill="#fff"/>
-            <circle cx="59.5" cy="59.5" r="1.2" fill="#fff"/>
-
-            <!-- NARIZ -->
+            <!-- boca -->
             <path
-                d="M48 69 Q50 67 52 69 Q50 72 48 69Z"
-                fill="#8d4059"/>
-
-            <!-- BOCA -->
-            <path
-                d="M50 71 Q46 76 43 72 M50 71 Q54 76 57 72"
+                d="M52 75 Q50 79 47 78
+                   M52 75 Q54 79 57 78"
                 fill="none"
-                stroke="#5b2537"
-                stroke-width="1.5"
+                stroke="#9b3152"
+                stroke-width="1.4"
                 stroke-linecap="round"/>
 
-            <!-- BIGOTES -->
-            <path d="M28 68 L8 64 M28 73 L7 74 M29 78 L11 84"
-                  stroke="#9b9b9b"
-                  stroke-width="1"
-                  opacity=".65"/>
+            <!-- bigotes -->
+            <g stroke="#9d8c7b" stroke-width="1" opacity=".65">
+                <path d="M31 71 L10 67"/>
+                <path d="M31 76 L9 78"/>
+                <path d="M70 71 L90 66"/>
+                <path d="M70 76 L91 78"/>
+            </g>
 
-            <path d="M72 68 L92 64 M72 73 L93 74 M71 78 L89 84"
-                  stroke="#9b9b9b"
-                  stroke-width="1"
-                  opacity=".65"/>
-
-            <!-- CUERPO -->
-            <ellipse
-                cx="50"
-                cy="105"
-                rx="25"
-                ry="31"
-                fill="#080808"
-                stroke="#171717"
-                stroke-width="2"/>
-
-            <!-- PECHO -->
-            <ellipse
-                cx="50"
-                cy="105"
-                rx="13"
-                ry="22"
-                fill="#111111"/>
-
-            <!-- PATA TRASERA -->
-            <ellipse
-                cx="35"
-                cy="128"
-                rx="11"
-                ry="16"
-                fill="#070707"
-                stroke="#171717"
-                stroke-width="2"/>
-
-            <ellipse
-                cx="65"
-                cy="128"
-                rx="11"
-                ry="16"
-                fill="#070707"
-                stroke="#171717"
-                stroke-width="2"/>
-
-            <!-- COLA -->
+            <!-- pecho -->
             <path
-                d="M70 105
-                   C103 95 105 62 84 51
-                   C72 45 67 54 75 61
-                   C86 71 89 86 72 91"
+                d="M32 84 Q49 94 67 84"
                 fill="none"
-                stroke="#070707"
-                stroke-width="9"
-                stroke-linecap="round"/>
-
-            <path
-                d="M70 105
-                   C103 95 105 62 84 51
-                   C72 45 67 54 75 61
-                   C86 71 89 86 72 91"
-                fill="none"
-                stroke="#171717"
+                stroke="#4a1929"
                 stroke-width="2"
-                stroke-linecap="round"/>
+                opacity=".5"/>
 
-        </svg>
-    </div>
+        </g>
+
+    </svg>
+
 </div>
-    <script>
-/* =========================
-   AUDIOS
-========================= */
+
+<script>
+/* =====================================================
+   CONFIGURACIÓN
+===================================================== */
+
+const CORRECT_PIN = "101010";
+
+/* =====================================================
+   ELEMENTOS
+===================================================== */
+
+const lockScreen = document.getElementById("lockScreen");
+const lockBox = document.getElementById("lockBox");
+const mainContent = document.getElementById("mainContent");
+
+const pinDots = document.querySelectorAll(".pin-dot");
+const pinError = document.getElementById("pinError");
+const pinKeys = document.querySelectorAll(".pin-key");
 
 const music = document.getElementById("music");
 const bell = document.getElementById("bell");
 const meow = document.getElementById("meow");
+const musicButton = document.getElementById("musicButton");
 
-function playBell() {
-    if (!bell) return;
-    bell.currentTime = 0;
-    bell.play().catch(() => {});
-}
+const cat = document.getElementById("walkingCat");
+const catBubble = document.getElementById("catBubble");
 
-function playMeow() {
-    if (!meow) return;
+/* =====================================================
+   ESTADO
+===================================================== */
 
-    const now = Date.now();
-
-    if (now - lastMeow < 650) return;
-
-    lastMeow = now;
-    meow.currentTime = 0;
-    meow.play().catch(() => {});
-}
-
-function startMusic() {
-    if (!music) return;
-
-    music.volume = 0.45;
-
-    const promise = music.play();
-
-    if (promise) {
-        promise.catch(() => {});
-    }
-}
-
-/* =========================
-   PIN
-========================= */
-
-const correctPin = "101010";
 let enteredPin = "";
+let unlocked = false;
+let musicPlaying = false;
 
-const pinDisplay = document.getElementById("pinDisplay");
-const lockScreen = document.getElementById("lockScreen");
-const mainContent = document.getElementById("mainContent");
+let catX = 100;
+let catY = 250;
 
-function updatePin() {
-    if (!pinDisplay) return;
+let targetX = 100;
+let targetY = 250;
 
-    pinDisplay.textContent =
-        "•".repeat(enteredPin.length);
-}
+let catDirection = 1;
 
-function pressNumber(number) {
-
-    if (enteredPin.length >= 6) return;
-
-    enteredPin += number;
-
-    playBell();
-    updatePin();
-
-    if (enteredPin.length === 6) {
-
-        if (enteredPin === correctPin) {
-
-            startMusic();
-
-            if (lockScreen) {
-                lockScreen.classList.add("unlocking");
-            }
-
-            setTimeout(() => {
-
-                if (lockScreen) {
-                    lockScreen.style.display = "none";
-                }
-
-                if (mainContent) {
-                    mainContent.classList.add("visible");
-                }
-
-                startCat();
-                startParticles();
-                startRandomMeows();
-
-            }, 700);
-
-        } else {
-
-            if (pinDisplay) {
-                pinDisplay.classList.add("wrong");
-            }
-
-            setTimeout(() => {
-
-                enteredPin = "";
-                updatePin();
-
-                if (pinDisplay) {
-                    pinDisplay.classList.remove("wrong");
-                }
-
-            }, 600);
-        }
-    }
-}
-
-/* =========================
-   BOTONES DEL PIN
-========================= */
-
-document.querySelectorAll(".pin-button").forEach(button => {
-
-    button.addEventListener("click", () => {
-
-        const number = button.dataset.number;
-
-        if (number !== undefined) {
-            pressNumber(number);
-        }
-
-    });
-
-});
-
-/* =========================
-   MÚSICA
-========================= */
-
-const musicButton =
-    document.getElementById("musicButton");
-
-if (musicButton) {
-
-    musicButton.addEventListener("click", () => {
-
-        if (!music) return;
-
-        if (music.paused) {
-            music.play().catch(() => {});
-            musicButton.textContent = "♫ Música";
-        } else {
-            music.pause();
-            musicButton.textContent = "♫ Música pausada";
-        }
-
-    });
-}
-
-/* =========================
-   GATO
-========================= */
-
-const cat = document.getElementById("cat");
-
-let catX = 120;
-let catY = 200;
-
-let targetX = 120;
-let targetY = 200;
-
-let catMoving = false;
-let catSitting = false;
+let catState = "walking";
 
 let dragging = false;
 let dragOffsetX = 0;
 let dragOffsetY = 0;
 
+let lastFrame = performance.now();
 let lastMeow = 0;
+let bubbleTimer = null;
+let nextDecision = 0;
 
 const catMessages = [
     "miau ♡",
@@ -1749,381 +972,757 @@ const catMessages = [
     "mrr...",
     "te estaba buscando",
     "♡",
-    "mi humana favorita ♡",
     "miau miau",
-    "¿me acaricias?"
+    "aquí estoy",
+    "mi humana favorita ♡"
 ];
 
-function showCatMessage(message) {
+/* =====================================================
+   PARTÍCULAS
+===================================================== */
 
-    const bubble =
-        document.getElementById("catBubble");
+function createParticles(){
 
-    if (!bubble) return;
+    const container = document.getElementById("particles");
 
-    bubble.textContent = message;
-    bubble.classList.add("show");
+    for(let i=0;i<28;i++){
 
-    clearTimeout(bubble.hideTimer);
+        const p = document.createElement("div");
 
-    bubble.hideTimer = setTimeout(() => {
-        bubble.classList.remove("show");
-    }, 2200);
+        p.className = "particle";
+
+        p.style.left = Math.random()*100 + "%";
+        p.style.animationDuration = (7 + Math.random()*12) + "s";
+        p.style.animationDelay = (-Math.random()*15) + "s";
+
+        const size = 1 + Math.random()*3;
+
+        p.style.width = size + "px";
+        p.style.height = size + "px";
+
+        container.appendChild(p);
+    }
 }
 
-function randomCatMessage() {
+createParticles();
 
-    const message =
-        catMessages[
-            Math.floor(Math.random() * catMessages.length)
-        ];
+/* =====================================================
+   AUDIO
+===================================================== */
 
-    showCatMessage(message);
+function playBell(){
+
+    try{
+        bell.currentTime = 0;
+        bell.play().catch(()=>{});
+    }catch(e){}
 }
 
-/* =========================
-   POSICIÓN DEL GATO
-========================= */
+function startMusic(){
 
-function setCatPosition() {
+    try{
 
-    if (!cat) return;
+        music.volume = 0.42;
 
-    cat.style.left = catX + "px";
-    cat.style.top = catY + "px";
+        const promise = music.play();
+
+        if(promise){
+            promise
+                .then(()=>{
+                    musicPlaying = true;
+                    musicButton.textContent = "❚❚";
+                })
+                .catch(()=>{
+                    musicPlaying = false;
+                    musicButton.textContent = "♫";
+                });
+        }
+
+    }catch(e){}
 }
 
-function chooseNewTarget() {
+function stopMusic(){
 
-    const margin = 40;
+    music.pause();
 
-    const maxX =
-        Math.max(
-            margin,
-            window.innerWidth - 150
+    musicPlaying = false;
+
+    musicButton.textContent = "♫";
+}
+
+function playMeow(){
+
+    const now = Date.now();
+
+    if(now - lastMeow < 650){
+        return;
+    }
+
+    lastMeow = now;
+
+    try{
+
+        meow.currentTime = 0;
+        meow.volume = .75;
+
+        const promise = meow.play();
+
+        if(promise){
+            promise.catch(()=>{});
+        }
+
+    }catch(e){}
+
+    showMeowPop();
+
+    createHeart(catX + 60, catY + 50);
+}
+
+function showMeowPop(){
+
+    const pop = document.createElement("div");
+
+    pop.className = "meow-pop";
+
+    pop.textContent = Math.random() > .4 ? "miau ♡" : "mrr~";
+
+    pop.style.left = (catX + 55) + "px";
+    pop.style.top = (catY + 45) + "px";
+
+    document.body.appendChild(pop);
+
+    setTimeout(()=>{
+        pop.remove();
+    },1200);
+}
+
+/* =====================================================
+   MÚSICA MANUAL
+===================================================== */
+
+musicButton.addEventListener("click", ()=>{
+
+    if(!unlocked){
+        return;
+    }
+
+    if(musicPlaying){
+        stopMusic();
+    }else{
+        startMusic();
+    }
+
+});
+
+/* =====================================================
+   PIN
+===================================================== */
+
+pinKeys.forEach(button=>{
+
+    button.addEventListener("click", ()=>{
+
+        const number = button.dataset.number;
+
+        playBell();
+
+        if(enteredPin.length >= CORRECT_PIN.length){
+            return;
+        }
+
+        enteredPin += number;
+
+        updatePinDots();
+
+        if(enteredPin.length === CORRECT_PIN.length){
+
+            setTimeout(checkPin,100);
+
+        }
+
+    });
+
+});
+
+function updatePinDots(){
+
+    pinDots.forEach((dot,index)=>{
+
+        dot.classList.toggle(
+            "active",
+            index < enteredPin.length
         );
 
-    const maxY =
-        Math.max(
-            margin,
-            window.innerHeight - 190
-        );
+    });
+
+}
+
+function checkPin(){
+
+    if(enteredPin === CORRECT_PIN){
+
+        unlocked = true;
+
+        pinError.textContent = "";
+
+        /*
+           Importante:
+           la música empieza directamente después
+           del gesto de introducir el PIN.
+        */
+        startMusic();
+
+        lockScreen.classList.add("hidden");
+
+        setTimeout(()=>{
+            mainContent.classList.add("visible");
+            startCat();
+        },500);
+
+        setTimeout(()=>{
+            showBubble("hola, Alis 🖤");
+        },1500);
+
+        setTimeout(()=>{
+            playMeow();
+        },2200);
+
+        setTimeout(()=>{
+            autonomousMeow();
+        },9000);
+
+    }else{
+
+        pinError.textContent = "Mmm… ese no es. 🖤";
+
+        lockBox.classList.remove("shake");
+
+        void lockBox.offsetWidth;
+
+        lockBox.classList.add("shake");
+
+        enteredPin = "";
+
+        updatePinDots();
+
+        setTimeout(()=>{
+            pinError.textContent = "";
+        },1200);
+
+    }
+
+}
+
+/* =====================================================
+   GATO — MOVIMIENTO
+===================================================== */
+
+function getCatSize(){
+
+    return {
+        width:cat.offsetWidth || 145,
+        height:cat.offsetHeight || 145
+    };
+
+}
+
+function getBounds(){
+
+    const size = getCatSize();
+
+    return {
+        minX:8,
+        maxX:Math.max(8,window.innerWidth - size.width - 8),
+        minY:70,
+        maxY:Math.max(70,window.innerHeight - size.height - 15)
+    };
+
+}
+
+function chooseNewTarget(){
+
+    const bounds = getBounds();
 
     targetX =
-        margin +
-        Math.random() * (maxX - margin);
+        bounds.minX +
+        Math.random() *
+        (bounds.maxX - bounds.minX);
 
     targetY =
-        margin +
-        Math.random() * (maxY - margin);
+        bounds.minY +
+        Math.random() *
+        (bounds.maxY - bounds.minY);
 
-    catMoving = true;
-    catSitting = false;
+    if(Math.abs(targetX-catX) < 70){
 
-    if (cat) {
-        cat.classList.remove("sitting");
-        cat.classList.add("walking");
-    }
-}
+        targetX =
+            Math.min(
+                bounds.maxX,
+                Math.max(bounds.minX,targetX + 100)
+            );
 
-/* =========================
-   MOVIMIENTO
-========================= */
-
-function animateCat() {
-
-    if (!cat) return;
-
-    if (!dragging && catMoving) {
-
-        const dx = targetX - catX;
-        const dy = targetY - catY;
-
-        const distance =
-            Math.sqrt(dx * dx + dy * dy);
-
-        if (distance < 3) {
-
-            catMoving = false;
-            catSitting = true;
-
-            cat.classList.remove("walking");
-            cat.classList.add("sitting");
-
-            randomCatMessage();
-
-            setTimeout(() => {
-
-                if (!dragging) {
-                    chooseNewTarget();
-                }
-
-            }, 1500 + Math.random() * 3000);
-
-        } else {
-
-            const speed = 1.1;
-
-            catX += (dx / distance) * speed;
-            catY += (dy / distance) * speed;
-
-            const direction =
-                dx < 0 ? -1 : 1;
-
-            cat.style.transform =
-                `scaleX(${direction})`;
-
-            setCatPosition();
-        }
     }
 
-    requestAnimationFrame(animateCat);
+    catDirection =
+        targetX >= catX ? 1 : -1;
+
+    nextDecision =
+        performance.now() +
+        2800 +
+        Math.random()*4200;
+
+    cat.classList.remove("sitting");
+
+    catState = "walking";
 }
 
-/* =========================
-   INICIAR GATO
-========================= */
+function startCat(){
 
-function startCat() {
+    const bounds = getBounds();
 
-    if (!cat) return;
-
-    catX =
-        Math.max(
-            30,
-            Math.random() *
-            (window.innerWidth - 150)
-        );
-
-    catY =
-        Math.max(
-            70,
-            Math.random() *
-            (window.innerHeight - 220)
-        );
-
-    setCatPosition();
+    catX = bounds.minX + 20;
+    catY = Math.min(
+        bounds.maxY,
+        bounds.minY + 100
+    );
 
     chooseNewTarget();
 
-    animateCat();
+    requestAnimationFrame(catLoop);
 }
 
-/* =========================
-   ARRASTRAR GATO
-========================= */
+function catLoop(time){
 
-if (cat) {
+    const dt = Math.min(
+        40,
+        time - lastFrame
+    );
 
-    cat.addEventListener("pointerdown", event => {
+    lastFrame = time;
 
-        dragging = true;
+    if(unlocked && !dragging){
 
-        cat.setPointerCapture(event.pointerId);
+        if(catState === "walking"){
 
-        const rect =
-            cat.getBoundingClientRect();
+            const dx = targetX - catX;
+            const dy = targetY - catY;
 
-        dragOffsetX =
-            event.clientX - rect.left;
-
-        dragOffsetY =
-            event.clientY - rect.top;
-
-        cat.classList.add("dragging");
-        cat.classList.remove("walking");
-
-        playMeow();
-        showCatMessage("¡miau! ♡");
-
-        event.preventDefault();
-    });
-
-    cat.addEventListener("pointermove", event => {
-
-        if (!dragging) return;
-
-        catX =
-            event.clientX - dragOffsetX;
-
-        catY =
-            event.clientY - dragOffsetY;
-
-        catX =
-            Math.max(
-                5,
-                Math.min(
-                    window.innerWidth - 130,
-                    catX
-                )
+            const distance = Math.sqrt(
+                dx*dx + dy*dy
             );
 
-        catY =
-            Math.max(
-                5,
-                Math.min(
-                    window.innerHeight - 170,
-                    catY
-                )
-            );
+            if(distance < 8){
 
-        setCatPosition();
-    });
+                if(Math.random() < .4){
 
-    cat.addEventListener("pointerup", event => {
+                    sitCat();
 
-        if (!dragging) return;
+                }else{
 
-        dragging = false;
+                    chooseNewTarget();
 
-        cat.classList.remove("dragging");
-        cat.classList.add("sitting");
-
-        playMeow();
-        showCatMessage("mrrr... ♡");
-
-        setTimeout(() => {
-
-            if (!dragging) {
-                chooseNewTarget();
-            }
-
-        }, 1200);
-    });
-
-    cat.addEventListener("click", () => {
-
-        playMeow();
-        randomCatMessage();
-
-    });
-}
-
-/* =========================
-   MAULLIDOS AUTOMÁTICOS
-========================= */
-
-function startRandomMeows() {
-
-    function schedule() {
-
-        const delay =
-            9000 +
-            Math.random() * 9000;
-
-        setTimeout(() => {
-
-            if (!dragging) {
-
-                playMeow();
-
-                if (Math.random() > 0.4) {
-                    randomCatMessage();
                 }
+
+            }else{
+
+                const speed =
+                    Math.min(
+                        0.12 * dt,
+                        3.0
+                    );
+
+                catX += (dx/distance) * speed;
+                catY += (dy/distance) * speed;
+
+                catDirection =
+                    dx >= 0 ? 1 : -1;
+
             }
 
-            schedule();
+        }
 
-        }, delay);
+        if(catState === "sitting"){
+
+            if(time > nextDecision){
+
+                chooseNewTarget();
+
+            }
+
+        }
+
+        if(time > nextDecision &&
+           catState === "walking"){
+
+            if(Math.random() < .25){
+
+                sitCat();
+
+            }else{
+
+                chooseNewTarget();
+
+            }
+
+        }
+
+        applyCatPosition();
+
     }
 
-    schedule();
+    requestAnimationFrame(catLoop);
+
 }
 
-/* =========================
-   CORAZONES
-========================= */
+function sitCat(){
 
-function createHeart() {
+    catState = "sitting";
+
+    cat.classList.add("sitting");
+
+    showBubble(
+        Math.random() > .5
+        ? "mrr... ♡"
+        : "descansando..."
+    );
+
+    nextDecision =
+        performance.now() +
+        1800 +
+        Math.random()*3000;
+
+    if(Math.random() < .55){
+
+        setTimeout(()=>{
+            if(!dragging && unlocked){
+                playMeow();
+            }
+        },500);
+
+    }
+
+}
+
+function applyCatPosition(){
+
+    cat.style.transform =
+        `translate3d(${catX}px, ${catY}px, 0)
+         scaleX(${catDirection})`;
+
+}
+
+/* =====================================================
+   CAMBIO DE TAMAÑO / ORIENTACIÓN
+===================================================== */
+
+window.addEventListener("resize",()=>{
+
+    const bounds = getBounds();
+
+    catX = Math.min(bounds.maxX,Math.max(bounds.minX,catX));
+    catY = Math.min(bounds.maxY,Math.max(bounds.minY,catY));
+
+    targetX = Math.min(
+        bounds.maxX,
+        Math.max(bounds.minX,targetX)
+    );
+
+    targetY = Math.min(
+        bounds.maxY,
+        Math.max(bounds.minY,targetY)
+    );
+
+    applyCatPosition();
+
+});
+
+/* =====================================================
+   ARRASTRAR GATO
+===================================================== */
+
+cat.addEventListener("pointerdown",(event)=>{
+
+    if(!unlocked){
+        return;
+    }
+
+    event.preventDefault();
+
+    dragging = true;
+
+    cat.classList.add("dragging");
+
+    cat.setPointerCapture(event.pointerId);
+
+    const rect = cat.getBoundingClientRect();
+
+    dragOffsetX =
+        event.clientX - rect.left;
+
+    dragOffsetY =
+        event.clientY - rect.top;
+
+    catState = "sitting";
+
+    cat.classList.add("sitting");
+
+    showBubble("¿me vas a llevar? ♡");
+
+});
+
+cat.addEventListener("pointermove",(event)=>{
+
+    if(!dragging){
+        return;
+    }
+
+    event.preventDefault();
+
+    const bounds = getBounds();
+
+    catX =
+        event.clientX -
+        dragOffsetX;
+
+    catY =
+        event.clientY -
+        dragOffsetY;
+
+    catX =
+        Math.min(
+            bounds.maxX,
+            Math.max(bounds.minX,catX)
+        );
+
+    catY =
+        Math.min(
+            bounds.maxY,
+            Math.max(bounds.minY,catY)
+        );
+
+    catDirection =
+        event.movementX >= 0 ? 1 : -1;
+
+    applyCatPosition();
+
+});
+
+function releaseCat(event){
+
+    if(!dragging){
+        return;
+    }
+
+    dragging = false;
+
+    cat.classList.remove("dragging");
+
+    try{
+        cat.releasePointerCapture(event.pointerId);
+    }catch(e){}
+
+    playMeow();
+
+    showBubble(
+        Math.random() > .5
+        ? "miau ♡"
+        : "eso fue divertido"
+    );
+
+    createHeart(
+        catX + 60,
+        catY + 60
+    );
+
+    catState = "walking";
+
+    chooseNewTarget();
+
+}
+
+cat.addEventListener("pointerup",releaseCat);
+cat.addEventListener("pointercancel",releaseCat);
+
+/* =====================================================
+   TOCAR / ACARICIAR
+===================================================== */
+
+cat.addEventListener("click",(event)=>{
+
+    if(!unlocked){
+        return;
+    }
+
+    playMeow();
+
+    const messages = [
+        "miau ♡",
+        "otra vez...",
+        "me gusta eso ♡",
+        "mrrr...",
+        "¿me acariciaste?",
+        "♡"
+    ];
+
+    showBubble(
+        messages[
+            Math.floor(
+                Math.random()*messages.length
+            )
+        ]
+    );
+
+});
+
+/* =====================================================
+   BURBUJA
+===================================================== */
+
+function showBubble(text){
+
+    catBubble.textContent = text;
+
+    catBubble.classList.add("show");
+
+    clearTimeout(bubbleTimer);
+
+    bubbleTimer = setTimeout(()=>{
+
+        catBubble.classList.remove("show");
+
+    },2200);
+
+}
+
+/* =====================================================
+   MAULLIDOS AUTOMÁTICOS
+===================================================== */
+
+function autonomousMeow(){
+
+    if(!unlocked){
+        return;
+    }
+
+    if(!dragging){
+
+        if(Math.random() < .65){
+
+            playMeow();
+
+            showBubble(
+                catMessages[
+                    Math.floor(
+                        Math.random()*catMessages.length
+                    )
+                ]
+            );
+
+        }
+
+    }
+
+    setTimeout(
+        autonomousMeow,
+        9000 + Math.random()*9000
+    );
+
+}
+
+/* =====================================================
+   CORAZONES
+===================================================== */
+
+function createHeart(x,y){
 
     const heart =
         document.createElement("div");
 
-    heart.className = "floating-heart";
-    heart.textContent = "♡";
+    heart.className =
+        "floating-heart";
 
-    heart.style.left =
-        Math.random() * 100 + "vw";
+    heart.textContent =
+        Math.random() > .3
+        ? "♥"
+        : "♡";
 
-    heart.style.animationDuration =
-        5 + Math.random() * 5 + "s";
+    heart.style.left = x + "px";
+    heart.style.top = y + "px";
 
     document.body.appendChild(heart);
 
-    setTimeout(() => {
+    setTimeout(()=>{
         heart.remove();
-    }, 10000);
+    },2400);
+
 }
 
-function startParticles() {
+/* =====================================================
+   CORAZONES AMBIENTALES
+===================================================== */
 
-    setInterval(() => {
+setInterval(()=>{
 
-        createHeart();
+    if(!unlocked){
+        return;
+    }
 
-    }, 1200);
-}
+    if(Math.random() < .35){
 
-/* =========================
-   TOQUE AL GATO
-========================= */
+        const x =
+            Math.random()*window.innerWidth;
 
-if (cat) {
+        const y =
+            window.innerHeight - 20;
 
-    cat.addEventListener("pointerdown", () => {
+        createHeart(x,y);
 
-        cat.classList.add("petted");
+    }
 
-        setTimeout(() => {
-            cat.classList.remove("petted");
-        }, 500);
+},3500);
 
-    });
-}
+/* =====================================================
+   EVITAR SELECCIÓN ACCIDENTAL
+===================================================== */
 
-/* =========================
-   REDIMENSIONAR PANTALLA
-========================= */
-
-window.addEventListener("resize", () => {
-
-    catX =
-        Math.min(
-            catX,
-            window.innerWidth - 130
-        );
-
-    catY =
-        Math.min(
-            catY,
-            window.innerHeight - 170
-        );
-
-    setCatPosition();
+document.addEventListener("dragstart",(event)=>{
+    if(event.target === cat){
+        event.preventDefault();
+    }
 });
 
-/* =========================
-   TECLADO
-========================= */
+/* =====================================================
+   TECLADO — POR SI SE ABRE EN PC
+===================================================== */
 
-document.addEventListener("keydown", event => {
+document.addEventListener("keydown",(event)=>{
 
-    if (/^[0-9]$/.test(event.key)) {
-        pressNumber(event.key);
+    if(unlocked){
+        return;
+    }
+
+    if(/^[0-9]$/.test(event.key)){
+
+        const button =
+            document.querySelector(
+                `[data-number="${event.key}"]`
+            );
+
+        if(button){
+            button.click();
+        }
+
     }
 
 });
 
-/* =========================
-   MENSAJE INICIAL
-========================= */
+/* =====================================================
+   ESTADO INICIAL
+===================================================== */
 
-setTimeout(() => {
+updatePinDots();
 
-    showCatMessage("miau ♡");
+</script>
 
-}, 1000);
-
-    </script>
-    </body>
-    </html>
+</body>
+</html>
